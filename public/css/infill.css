@@ -1,0 +1,16 @@
+.page-body {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    
+}
+
+
+
+.canvas-container {
+ display:inline-block;
+ justify-items: center;
+border: 4px solid black;
+border-bottom: none;
+background: black;
+}
