@@ -24,7 +24,7 @@ class Game {
                         rad: rad,
                         growSpeed: growSpeed,
                         maxRad: maxRad,
-                        isGrowing: true,
+                        isGrowing: 0,
                     })
 
                     this.enemyCircles.push(circle)
@@ -42,7 +42,7 @@ class Game {
                        rad: rad,
                        growSpeed: growSpeed,
                        maxRad: maxRad,
-                       isGrowing: true,
+                       isGrowing: 0,
                      });
 
                     this.friendlyCircles.push(circle);
@@ -57,7 +57,8 @@ class Game {
 
     draw(ctx) {
        ctx.clearRect(0, 0, 1200, 800);
-        this.allCircles().forEach(circle => (circle.draw(ctx)))
+        this.allCircles().forEach(circle => (circle.draw(ctx)));
+        this.allCircles().forEach(circle => (circle.grow()))
     }
 }
 

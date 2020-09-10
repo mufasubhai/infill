@@ -35,9 +35,9 @@ class Circle {
         ctx.fill();
         ctx.stroke();
         
-        if (this.rad < this.maxRad) {
-            this.rad += this.growSpeed;
-        }
+        // if (this.rad < this.maxRad) {
+        //     this.rad += this.growSpeed;
+        // }
     }
 
     hasCollided(oCirc) {  
@@ -56,9 +56,13 @@ class Circle {
     }
 
     grow() {
-        if ((this.rad < this.maxRad) && this.isGrowing) {
+        if ((this.rad < this.maxRad) && (this.isGrowing === 0)) {
             this.rad += this.growSpeed;
-        } 
+        } else if (this.isGrowing === 1) {
+            this.rad -= this.growSpeed;
+        } else {
+            this.rad = this.rad;
+        }
     }
     render (ctx) {
 
