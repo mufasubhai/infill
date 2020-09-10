@@ -17,8 +17,15 @@ class Circle {
         // let grd = ctx.createRadialGradient(0, 50, 5, 90, 60, 100);
         // grd.addColorStop(0, "white" );
         // grd.addColorStop(1, this.color);
+        var gradient = ctx.createLinearGradient(0, 0, 900, 0);
+        gradient.addColorStop("0", "magenta");
+        gradient.addColorStop("0.5", "blue");
+        gradient.addColorStop("1.0", "red");
         ctx.fillStyle = this.color;
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'purple'
         // ctx.fillStyle = grid;
+        // ctx.strokeStyle = '2px white';
         ctx.beginPath();
         ctx.arc(
             this.pos[0], 
@@ -26,6 +33,8 @@ class Circle {
             this.rad, 0, 2 * Math.PI, true
         );
         ctx.fill();
+        ctx.stroke();
+        
         if (this.rad < this.maxRad) {
             this.rad += this.growSpeed;
         }

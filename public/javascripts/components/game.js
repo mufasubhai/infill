@@ -13,8 +13,8 @@ class Game {
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
-                    let circleX = 100 * i;
-                    let circleY = 100 * j;
+                    let circleX = 65 * i;
+                    let circleY = 65 * j;
                     let growSpeed = Math.floor(Math.random() * 5) * .01 ;
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;
@@ -30,8 +30,8 @@ class Game {
                     this.enemyCircles.push(circle)
 
                 } else if (level[i][j] === 2) {
-                    let circleX = 100 * i;
-                    let circleY = 100 * j;   
+                    let circleX = 65 * i;
+                    let circleY = 65 * j;   
                     let growSpeed = Math.floor(Math.random() * 5) * .01;
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;

@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // function for random gradients
     
     const canvas = document.getElementById('game-canvas')
-    canvas.width = "1050";
-    canvas.height = "650"
+    canvas.width = "1100";
+    canvas.height = "715"
     canvas.style =
       "background:linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)";
     
