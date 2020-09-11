@@ -8,7 +8,7 @@ class friendlyCircle extends Circle {
 
     collideWith(object) {
         if (object instanceof enemyCircle) {
-            this.isGrowing = false;
+            this.isGrowing = 1;
         } 
     }
 }

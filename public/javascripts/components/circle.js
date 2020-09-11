@@ -47,7 +47,7 @@ class Circle {
             oCirc.pos[1]
             );
         
-        return centerDist  < this.rad - oCirc.rad;
+        return centerDist  < this.rad + oCirc.rad;
     } 
 
     collideWith(object) {
@@ -57,7 +57,7 @@ class Circle {
     grow() {
         if ((this.rad < this.maxRad) && (this.isGrowing === 0)) {
             this.rad += this.growSpeed;
-        } else if (this.isGrowing === 1) {
+        } else if (this.isGrowing === 2 && this.rad >= 1) {
             this.rad -= this.growSpeed;
         } else {
             this.rad = this.rad;
