@@ -1,5 +1,5 @@
-const Circle = require('./circle');
-
+import Circle from './circle'
+import friendlyCircle from './friendly_circle'
 
 class enemyCircle extends Circle {
   constructor(options) {
@@ -8,15 +8,15 @@ class enemyCircle extends Circle {
 
   collideWith(object) {
     if (object instanceof friendlyCircle) {
-      this.isGrowing = false;
+      this.isGrowing = 1;
     }
   }
 
   pauseGrowth(time) {
-      this.isGrowing = false;
-      setInterval(() => (this.isGrowing = true), time)
+      this.isGrowing = 1;
+      setInterval(() => (this.isGrowing = 0), time)
   }
 }
 
-module.exports = enemyCircle;
+export default enemyCircle;
 

@@ -181,3 +181,19 @@ export const Levels = {
   ],
 };
 
+
+export const Gradients = [
+  "background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)",
+  "background: radial-gradient(circle, rgba(174,238,237,1) 34%, rgba(148,163,233,1) 77%)",
+  "background: linear-gradient(90deg, rgba(236,157,133,1) 0%, rgba(189,53,235,0.6797093837535014) 81%, rgba(241,246,255,0.6797093837535014) 100%)",
+  "background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(45,253,120,0.8841911764705882) 100%)",
+  "background: radial-gradient(circle, rgba(53,235,115,1) 0%, rgba(81,136,255,0.7945553221288515) 100%)",
+  "background: radial-gradient(circle, rgba(238,174,235,0.7609418767507002) 34%, rgba(170,233,148,1) 77%)",
+  "background: linear-gradient(0deg, rgba(195,103,34,1) 0%, rgba(85,45,253,0.8841911764705882) 100%)",
+  "background: linear-gradient(0deg, rgba(34,195,143,0.8589810924369747) 0%, rgba(253,45,208,0.8841911764705882) 100%)",
+  "background: linear-gradient(0deg, rgba(90,195,34,0.8589810924369747) 0%, rgba(144,45,253,0.8841911764705882) 100%)",
+  "background: radial-gradient(circle, rgba(235,53,220,1) 0%, rgba(255,211,81,0.788953081232493) 100%)",
+  "background: linear-gradient(90deg, rgba(180,180,58,1) 0%, rgba(200,29,253,0.9570203081232493) 50%, rgba(252,69,105,1) 100%)",
+  "background: radial-gradient(circle, rgba(193,174,238,1) 34%, rgba(233,181,148,1) 77%)",
+  "background: radial-gradient(circle, rgba(44,38,75,0.9850315126050421) 34%, rgba(193,20,63,1) 77%)",
+];

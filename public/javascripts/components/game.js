@@ -1,6 +1,5 @@
-const friendlyCircle = require('./friendly_circle');
-const enemyCircle = require('./enemy_circle');
-
+import friendlyCircle from './friendly_circle'
+import enemyCircle from './enemy_circle'
 
 
 class Game {
@@ -18,9 +17,11 @@ class Game {
                     let growSpeed = Math.floor(Math.random() * 5) * .01 ;
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;
+                    let colors = [ '#c43e37', '#c45637', '#b37120', '#b32036', '#a68428']
+                    let randomColor = colors[Math.floor(Math.random() * 4)]
                     const circle = new enemyCircle({
                         pos: [circleX, circleY],
-                        color: 'blue',
+                        color: randomColor,
                         rad: rad,
                         growSpeed: growSpeed,
                         maxRad: maxRad,
@@ -35,10 +36,12 @@ class Game {
                     let growSpeed = Math.floor(Math.random() * 5) * .01;
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;
-
+                    let colors = [ '#28a641', '#28a6a4', '#284aa6', '#41338f', '#1f6a87']
+                    let randomColor = colors[Math.floor(Math.random() * 4)]
+                    
                      const circle = new friendlyCircle({
                        pos: [circleX, circleY],
-                       color:"red",
+                       color: randomColor,
                        rad: rad,
                        growSpeed: growSpeed,
                        maxRad: maxRad,
@@ -59,7 +62,27 @@ class Game {
        ctx.clearRect(0, 0, 1200, 800);
         this.allCircles().forEach(circle => (circle.draw(ctx)));
         this.allCircles().forEach(circle => (circle.grow()))
+        this.checkCollisions();
+    }
+
+    inBounds(pos) {
+        return (pos[0] < 0) || (pos[1] < 0) || (pos[0] > 1100) || (pos[1] > 715)
+    }
+
+    checkCollisions() {
+        const allCircles = this.allCircles();
+        for (let i = 0; i < allCircles.length; i++) {
+            for (let j = 0; j < allCircles.length; j++){
+                const circ1 =  allCircles[i];
+                const circ2 = allCircles[j];
+
+                if (circ1.hasCollided(circ2)) {
+                    circ1.collideWith(circ2);
+                   
+                }
+            }
+        }
     }
 }
 
-module.exports = Game;
+export default Game;

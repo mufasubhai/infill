@@ -1,6 +1,5 @@
 
-const Util = require('./util')
-
+import {dist} from './util'
 
 class Circle {
     constructor(opts) {
@@ -41,7 +40,7 @@ class Circle {
     }
 
     hasCollided(oCirc) {  
-        const centerDist = Util.dist(
+        const centerDist = dist(
             this.pos[0], 
             this.pos[1], 
             oCirc.pos[0], 
@@ -70,4 +69,4 @@ class Circle {
 
 }
 
-module.exports = Circle;
+export default Circle;

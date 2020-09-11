@@ -1,4 +1,5 @@
-const Circle = require('./circle')
+import Circle from './circle'
+import enemyCircle from './enemy_circle'
 
 class friendlyCircle extends Circle {
     constructor(options) {
@@ -12,4 +13,4 @@ class friendlyCircle extends Circle {
     }
 }
 
-module.exports = friendlyCircle;
+export default friendlyCircle;
