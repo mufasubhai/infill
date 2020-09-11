@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("game-canvas");
   canvas.width = "1100";
   canvas.height = "715";
-  canvas.style = Gradients[Math.floor(Math.random() * 12)];
+  canvas.style =  Gradients[Math.floor(Math.random() * 12)];
     
 
   const ctx = canvas.getContext("2d");

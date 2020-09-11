@@ -14,7 +14,7 @@ class Game {
                 if (level[i][j] === 1) {
                     let circleX = 65 * i;
                     let circleY = 65 * j;
-                    let growSpeed = Math.floor(Math.random() * 5) *.05;
+                    let growSpeed = .1 +(Math.floor(Math.random() * 5) *.03);
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;
                     let colors = [ '#c43e37', '#c45637', '#b37120', '#b32036', '#a68428']
@@ -33,7 +33,7 @@ class Game {
                 } else if (level[i][j] === 2) {
                     let circleX = 65 * i;
                     let circleY = 65 * j;   
-                    let growSpeed = Math.floor(Math.random() * 5) * .05;
+                    let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;
                     let colors = [ '#28a641', '#28a6a4', '#284aa6', '#41338f', '#1f6a87']
@@ -63,10 +63,8 @@ class Game {
         this.allCircles().forEach(circle => (circle.draw(ctx)));
         this.allCircles().forEach(circle => (circle.grow()))
         this.checkCollisions();
-    }
-
-    inBounds(pos) {
-        return (pos[0] < 0) || (pos[1] < 0) || (pos[0] > 1100) || (pos[1] > 715)
+        // console.log(this.enemyCircleScore());
+        console.log(this.friendlyCircleScore())
     }
 
     checkCollisions() {
@@ -83,6 +81,20 @@ class Game {
             }
         }
     }
+
+    enemyCircleScore() {
+        const rads = this.enemyCircles.map(circle => circle.rad);
+        return rads.reduce((a, b) => (a + b));
+    }
+
+    friendlyCircleScore() {
+        const rads = this.friendlyCircles.map(circle => circle.rad);
+        return rads.reduce((a, b) => (a + b));
+    }
+    // inBounds(pos) {
+    //     return (pos[0] < 0) || (pos[1] < 0) || (pos[0] > 1100) || (pos[1] > 715)
+    // }
+
 }
 
 export default Game;
