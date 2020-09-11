@@ -21,8 +21,10 @@ class Circle {
         gradient.addColorStop("0.5", "blue");
         gradient.addColorStop("1.0", "red");
         ctx.fillStyle = this.color;
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'purple'
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "#c6d613";
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = "#ac13d6";
         // ctx.fillStyle = grid;
         // ctx.strokeStyle = '2px white';
         ctx.beginPath();
