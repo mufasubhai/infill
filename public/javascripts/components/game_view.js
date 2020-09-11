@@ -1,4 +1,3 @@
-
 class GameView {
     constructor(ctx, game) {
         this.ctx = ctx;
@@ -6,21 +5,17 @@ class GameView {
 
     }
 
-    bindKeyHandlers() {
-
-    }
-
     start() {
-        // this.bindKeyHandlers();
-        
         requestAnimationFrame(this.animate.bind(this))
     }
-
+    
     animate () {
         this.game.draw(this.ctx);
         requestAnimationFrame(this.animate.bind(this))
     }
-    
+  
+    // bindKeyHandlers() {
+    // }
 }
 
 

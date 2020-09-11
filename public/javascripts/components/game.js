@@ -6,6 +6,7 @@ class Game {
     constructor() {
         this.enemyCircles = [];
         this.friendlyCircles = [];
+        this.gameOver = false;
     }
 
     buildLevel(level) {
@@ -54,6 +55,14 @@ class Game {
         }
     }
 
+    playLevel(level) {
+        this.startTime = Date.now
+    }
+
+    levelTimer() {
+        return (Date.now() - startTime) / 1000
+    }
+
     allCircles() {
         return [].concat(this.enemyCircles, this.friendlyCircles);
     }
@@ -76,7 +85,6 @@ class Game {
 
                 if (circ1.hasCollided(circ2)) {
                     circ1.collideWith(circ2);
-                   
                 }
             }
         }
@@ -91,10 +99,7 @@ class Game {
         const rads = this.friendlyCircles.map(circle => circle.rad);
         return rads.reduce((a, b) => (a + b));
     }
-    // inBounds(pos) {
-    //     return (pos[0] < 0) || (pos[1] < 0) || (pos[0] > 1100) || (pos[1] > 715)
-    // }
-
+ 
 }
 
 export default Game;
