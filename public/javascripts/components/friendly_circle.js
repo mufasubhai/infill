@@ -11,6 +11,12 @@ class friendlyCircle extends Circle {
             this.isGrowing = 1;
         } 
     }
+    speedGrowth(time) {
+        const oldSpeed = this.growSpeed;
+      this.growSpeed *= 3;
+      setInterval(() => (this.growSpeed = oldSpeed), time)
+
+    }
 }
 
 export default friendlyCircle;

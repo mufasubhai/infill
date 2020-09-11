@@ -14,7 +14,7 @@ class Game {
                 if (level[i][j] === 1) {
                     let circleX = 65 * i;
                     let circleY = 65 * j;
-                    let growSpeed = Math.floor(Math.random() * 5) *.1;
+                    let growSpeed = Math.floor(Math.random() * 5) *.05;
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;
                     let colors = [ '#c43e37', '#c45637', '#b37120', '#b32036', '#a68428']
@@ -33,7 +33,7 @@ class Game {
                 } else if (level[i][j] === 2) {
                     let circleX = 65 * i;
                     let circleY = 65 * j;   
-                    let growSpeed = Math.floor(Math.random() * 5) * .1;
+                    let growSpeed = Math.floor(Math.random() * 5) * .05;
                     let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
                     let rad = Math.floor(Math.random() * 5) + 10;
                     let colors = [ '#28a641', '#28a6a4', '#284aa6', '#41338f', '#1f6a87']

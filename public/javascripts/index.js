@@ -4,6 +4,8 @@ import Game from './components/game'
 const GameView = require("./components/game_view");
 import { Levels, Gradients } from "./components/elements";
 import {dist} from './components/util'
+import enemyCircle from './components/enemy_circle'
+import friendlyCircle from './components/friendly_circle'
 
 document.addEventListener("DOMContentLoaded", () => {
   // function for random gradients
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ctx = canvas.getContext("2d");
   const levels = Levels;
   const game = new Game();
-  let currentLevel = 1;
+  let currentLevel = 2;
 
   function isIntersect(point, circle) {
     return dist(point[0],point[1], circle.pos[0],circle.pos[1])< circle.rad;
@@ -30,8 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
     
     game.allCircles().forEach(circle => {
-      if (isIntersect(pos, circle)) {
-        console.log('click on circle:' + circle.color)
+      if (isIntersect(pos, circle) && (circle instanceof enemyCircle)) {
+        circle.pauseGrowth(3000);
+        console.log(circle)
+      } else if (isIntersect(pos, circle) && (circle instanceof friendlyCircle)) {
+        circle.speedGrowth(1000);
+        console.log(circle)
       }
     })
 
