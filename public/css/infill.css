@@ -36,6 +36,8 @@
   list-style: square;
   font-family: "Lucida Console", Monaco, monospace;
   align-self: center;
+    text-shadow: 2px 2px #ac13d6;
+
 }
 
 .music {
