@@ -1,14 +1,25 @@
-# Simple Node API Backend
+# InFill
 
-Simple Node Backend for avoiding CORS issues in development
-- npm install
-- npm run build
-- npm start
+[Play InFill]()
+![infill game start]()
 
-Technologies
-- express
-- axios
-- webpack
+## Controls 
+* Just click on the bubbles!
+
+## Technologies
+- JavaScript
+- Tone.js
+- Webpack
+- Firebase
+- HTML5 Canvas
+
+## Coming VERY soon
+- [ ] Level based gameplay
+- [ ] Music from tone.js
+- [ ] High Scores using firebase
+
+
+
 
 Implementation
 
