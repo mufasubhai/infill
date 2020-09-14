@@ -10,6 +10,7 @@ class Game {
     }
 
     buildLevel(level) {
+        console.log(level)
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
@@ -73,7 +74,8 @@ class Game {
         this.allCircles().forEach(circle => (circle.grow()))
         this.checkCollisions();
         // console.log(this.enemyCircleScore());
-        console.log(this.friendlyCircleScore())
+        // console.log(this.friendlyCircleScore())
+        console.log(this.overallScore())
     }
 
     checkCollisions() {
@@ -100,6 +102,11 @@ class Game {
         return rads.reduce((a, b) => (a + b));
     }
  
+    overallScore() {
+        const overall = (this.friendlyCircleScore() / (this.enemyCircleScore() + this.friendlyCircleScore())) * 100;
+       
+        return overall;
+    }
 }
 
 export default Game;

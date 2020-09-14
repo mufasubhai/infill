@@ -6,16 +6,57 @@
     
 }
 
+.body-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.side-container {
+    border: 4px solid white;
+    border-bottom: 8px solid white;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-container li {
+  color: white;  
+  list-style: none;
+  font-family: "Lucida Console", Monaco, monospace;
+  padding-bottom: 18px;
+  font-size:18px;
+  text-shadow: 2px 2px #ac13d6;
+}
+.side-container h1 {
+  color: white;  
+  list-style: square;
+  font-family: "Lucida Console", Monaco, monospace;
+  align-self: center;
+}
+
+.music {
+    align-self: center;
+    padding-top: 30px;
+
+}
+.music:hover {
+    color: blue;
+    text-shadow: 3px 3px  #ac13d6;;
+    cursor: pointer;
+}
 
 
 .canvas-container {
  display:inline-block;
  justify-items: center;
-border: 4px solid black;
-border-bottom: none;
-background: black;
+border: 4px solid White;
+
+background: white;
 }
 
 #game-canvas {
     cursor: pointer;
 }
+
+

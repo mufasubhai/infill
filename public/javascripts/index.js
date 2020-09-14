@@ -7,6 +7,22 @@ import {dist} from './components/util'
 import enemyCircle from './components/enemy_circle'
 import friendlyCircle from './components/friendly_circle'
 
+
+// handleMusic(e) {
+//   e.preventDefault();
+//   if (this.musicBtn.classList.contains('music-on')) {
+//     this.music.play();
+//     this.musicBtn.classList.remove('music-on');
+//     this.musicBtn.classList.add('music-off');
+//     this.musicBtn.innerHtml = "Music: Off";
+//     } else if (this.musicBtn.classList.contains('music-off')) {
+//       this.music.pause();
+//       this.musicBtn.classList.remove('music-off');
+//       this.musicBtn.classList.add('music-on');
+//       this.musicBtn.innerHtml = "Music: On";
+//     }
+// }
+
 document.addEventListener("DOMContentLoaded", () => {
   
   const canvas = document.getElementById("game-canvas");
@@ -16,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ctx = canvas.getContext("2d");
   const levels = Levels;
+  console.log(levels)
   const game = new Game();
   let currentLevel = 1;
 
