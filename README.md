@@ -1,7 +1,10 @@
 # InFill
 
-[Play InFill]()
-![infill game start]()
+[Play InFill](https://mufasubhai.github.io/infill/)
+![InFill game start](https://github.com/mufasubhai/infill/blob/master/public/assets/images/Infill.gif?raw=true)
+
+## Overview
+InFill is an ambient JavaScript game built using vanilla JavasCript, WebPack, HTML5 Canvas and Tone.js for ambient music. Blue and green circles are your friends. Red and orange? Not so much! Click on circles to grow or pause them. Advance to the next level by occupying more space than the computer.
 
 ## Controls 
 * Just click on the bubbles!
@@ -19,27 +22,52 @@
 - [ ] High Scores using firebase
 
 
+### Code Snippet: Level Building
 
+```javascript
+buildLevel(level) {
+        for (let i = 0; i < level.length; i++) {
+            for (let j = 0; j< level[0].length; j++) {
+                if (level[i][j] === 1) {
+                    let circleX = 65 * i;
+                    let circleY = 65 * j;
+                    let growSpeed = .1 +(Math.floor(Math.random() * 5) *.03);
+                    let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
+                    let rad = Math.floor(Math.random() * 5) + 10;
+                    let colors = [ '#c43e37', '#c45637', '#b37120', '#b32036', '#a68428']
+                    let randomColor = colors[Math.floor(Math.random() * 4)]
+                    const circle = new enemyCircle({
+                        pos: [circleX, circleY],
+                        color: randomColor,
+                        rad: rad,
+                        growSpeed: growSpeed,
+                        maxRad: maxRad,
+                        isGrowing: 0,
+                    })
 
-Implementation
+                    this.enemyCircles.push(circle)
 
-This project allows you to serve your HTML and JS from a custom backend that performs API requests to an external API.
+                } else if (level[i][j] === 2) {
+                    let circleX = 65 * i;
+                    let circleY = 65 * j;   
+                    let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
+                    let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
+                    let rad = Math.floor(Math.random() * 5) + 10;
+                    let colors = [ '#28a641', '#28a6a4', '#284aa6', '#41338f', '#1f6a87']
+                    let randomColor = colors[Math.floor(Math.random() * 4)]
+                    
+                     const circle = new friendlyCircle({
+                       pos: [circleX, circleY],
+                       color: randomColor,
+                       rad: rad,
+                       growSpeed: growSpeed,
+                       maxRad: maxRad,
+                       isGrowing: 0,
+                     });
 
-app.js contains the routes that you need to get your data. Customize them according to the paths you wish to use in your code, and the API you wish to access
-
-Write your JS in the javascripts folder; your entry file is index.js.
-
-In the entry file 
-
-A unique single player game where a player must click on circles to cause them to expand.
-Additionally, the player must click on "enemy" circles to stop their growth.
-
-Enemy circles can be clicked on to pause their growth and grow at variable rates. If an enemy circle grows into a player circle, both the enemy circle and the player circle stop growing.
-The objective of the game is to occupy space up to a target percentage of the area of the canvas for subsequent rounds with progressive difficulty.
-11:15
-
-Tuesday -> Paint Board and begin logic for circles
-Wednesday -> finish painting circles and start differentiation between enemy and friendly circles
-Thursday -> Implement logic for game pace and percentage of game board.
-Friday -> implement level logic and begin building out levels.
-Saturday - Sunday ->  finish building out levels. add sound
+                    this.friendlyCircles.push(circle);
+                } 
+            }
+        }
+    }
+```

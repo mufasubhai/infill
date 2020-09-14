@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const ctx = canvas.getContext("2d");
   const levels = Levels;
-  console.log(levels)
   const game = new Game();
   let currentLevel = 1;
 
@@ -41,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   canvas.addEventListener('click', (e)=> {
-    console.log(e)
     const pos = [
       e.layerX,
       e.layerY,
@@ -50,10 +48,8 @@ document.addEventListener("DOMContentLoaded", () => {
     game.allCircles().forEach(circle => {
       if (isIntersect(pos, circle) && (circle instanceof enemyCircle)) {
         circle.pauseGrowth(3000);
-        console.log(circle)
       } else if (isIntersect(pos, circle) && (circle instanceof friendlyCircle)) {
         circle.speedGrowth(1000);
-        console.log(circle)
       }
     })
   })
