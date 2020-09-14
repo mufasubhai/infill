@@ -41,7 +41,7 @@
 
 }
 .music:hover {
-    color: blue;
+    color: #284aa6;
     text-shadow: 3px 3px  #ac13d6;;
     cursor: pointer;
 }
@@ -60,3 +60,21 @@ background: white;
 }
 
 
+.sidebar_list {
+    display:flex;
+    flex-direction: row;
+}
+
+.sidebar_nav_item {
+    height: 50px;
+    width: 50px;
+    padding: 40px;
+}
+
+.sidebar_icon {
+    fill: white;
+}
+.sidebar_icon:hover {
+    fill: #ac13d6;
+    cursor: pointer;
+}
