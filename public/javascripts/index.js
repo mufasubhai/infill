@@ -3,7 +3,7 @@ import Circle from './components/circle'
 import Game from './components/game'
 const GameView = require("./components/game_view");
 import { Levels, Gradients } from "./components/elements";
-import {dist} from './components/util'
+import { dist } from './components/util'
 import enemyCircle from './components/enemy_circle'
 import friendlyCircle from './components/friendly_circle'
 
@@ -34,6 +34,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const levels = Levels;
   const game = new Game();
   let currentLevel = 1;
+  let startText = `Phase ${currentLevel} commence.`;
+  let startTime = Date.now();
+  let playerScore = 0;
+  //game.overallScore()
+  let currentLevelScore = 0;
+
+  let clearWelcome = window.setInterval( ()  => {
+    startText = '';
+  }, 2000);
+
+  const restartGame = () => {
+    game.gameOver = false;
+    currentLevel = 1;
+    startTime = Date.now();
+  }
+
+  const levelTimer = () => {
+   20000 - (Date.now() - startTime) / 1000
+  }
 
   function isIntersect(point, circle) {
     return dist(point[0],point[1], circle.pos[0],circle.pos[1]) < circle.rad;

@@ -188,7 +188,7 @@ __webpack_require__.r(__webpack_exports__);
 const Levels = {
   1: [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -690,6 +690,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const levels = _components_elements__WEBPACK_IMPORTED_MODULE_2__["Levels"];
   const game = new _components_game__WEBPACK_IMPORTED_MODULE_1__["default"]();
   let currentLevel = 1;
+  let startText = `Phase ${currentLevel} commence.`;
+  let startTime = Date.now();
+  let playerScore = 0;
+  //game.overallScore()
+  let currentLevelScore = 0;
+
+  let clearWelcome = window.setInterval( ()  => {
+    startText = '';
+  }, 2000);
+
+  const restartGame = () => {
+    game.gameOver = false;
+    currentLevel = 1;
+    startTime = Date.now();
+  }
+
+  const levelTimer = () => {
+   20000 - (Date.now() - startTime) / 1000
+  }
 
   function isIntersect(point, circle) {
     return Object(_components_util__WEBPACK_IMPORTED_MODULE_3__["dist"])(point[0],point[1], circle.pos[0],circle.pos[1]) < circle.rad;
