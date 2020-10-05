@@ -36,6 +36,7 @@ class Circle {
         ctx.fill();
         ctx.stroke();
         
+        
         // if (this.rad < this.maxRad) {
         //     this.rad += this.growSpeed;
         // }
