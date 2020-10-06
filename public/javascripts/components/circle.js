@@ -50,7 +50,7 @@ class Circle {
             oCirc.pos[1]
             );
         
-        return centerDist  < this.rad + oCirc.rad;
+        return centerDist  < this.rad + oCirc.rad + 2;
     } 
 
     collideWith(object) {

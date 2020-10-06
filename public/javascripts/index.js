@@ -25,6 +25,13 @@ import friendlyCircle from './components/friendly_circle'
 
 document.addEventListener("DOMContentLoaded", () => {
   
+  document.body.addEventListener("keydown", (e) => {
+    keys[e.keyCode] = true;
+  });
+  document.body.addEventListener("keyup", (e) => {
+    keys[e.keyCode] = false;
+  });
+
   const canvas = document.getElementById("game-canvas");
   canvas.width = "1100";
   canvas.height = "715";
@@ -39,7 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let playerScore = 0;
   //game.overallScore()
   let currentLevelScore = 0;
-
+  
+  //  window.ctx = ctx;
+  //  window.Circle = Circle;
+  //  window.Game = Game;
+  new GameView(ctx, game).start(); //puy in loop?
+  game.buildLevel(levels[currentLevel]); // put in game loop
+  
   let clearWelcome = window.setInterval( ()  => {
     startText = '';
   }, 2000);
@@ -73,12 +86,38 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  game.buildLevel(levels[currentLevel]);
 
-  window.ctx = ctx;
+ 
 
-  window.Circle = Circle;
-  window.Game = Game;
-  
-  new GameView(ctx, game).start();
+  const gameLoop = () => {
+    if(game.gameOver) {
+      const gameOverModal = document.getElementById('gameover_modal');
+      const finalScore = playerScore;
+
+      
+      if (levelTimer <= 0) {
+        currentLevel ++;
+      } 
+
+      if (currentLevel > Object.keys(levels).length - 1 ) {
+        game.gameOver = true;
+      } else {
+          
+      }
+
+
+
+      const startOver = (e) => {
+        // click
+        
+      }
+
+
+    }
+    
+  }
+
+  gameLoop();
+
+
 });
