@@ -148,10 +148,14 @@ document.addEventListener("DOMContentLoaded", () => {
         game.gameOver = true;
         // const winnerWinnerModal = document.getElementById('winner_winner')
       }
-        
+        console.log(game.friendlyCircles)
       if ((game.levelTimer() >= 15) && (game.overallScore() < 50)) {
         game.gameOver = true;
         game.startTime = Date.now()
+        ctx.clearRect(0, 0, 1200, 800);
+           game.friendlyCircles = [];
+        game.enemyCircles = [];
+
       } else if ((game.levelTimer() >= 15) && (game.overallScore() > 50)) {
         finalScore += game.overallScore;
         ;
@@ -173,8 +177,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
   
+//     0: friendlyCircle { 
+// area: 1934.4424626135142,
+// color: "#28a641",
+// growSpeed: 0.19,
+// isGrowing: 1,
+// maxRad: 500,
+// pos: [0,2],git
 
+  // }
   gameLoop();
+
+  
 
 
 });
