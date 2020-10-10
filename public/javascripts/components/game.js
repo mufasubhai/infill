@@ -57,9 +57,9 @@ class Game {
         }
     }
 
-    playLevel(level) {
-        this.levelStart = Date.now()
-    }
+    // playLevel(level) {
+    //     this.levelStart = Date.now()
+    // }
 
     levelTimer() {
          const levelTime =  (Date.now() - this.startTime) / 1000;
@@ -75,7 +75,7 @@ class Game {
         this.allCircles().forEach(circle => (circle.draw(ctx)));
         this.allCircles().forEach(circle => (circle.grow()))
         this.checkCollisions();
-        // console.log(this.overallScore())
+       
     }
 
     checkCollisions() {

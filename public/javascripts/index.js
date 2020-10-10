@@ -134,7 +134,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // }
     game.buildLevel(levels[currentLevel]);
     
-
+    window.setInterval(function() {
+       console.log(game.overallScore())
+        console.log(game.levelTimer())
       if(game.gameOver) {
         finalScore = playerScore;
         //logic for firebase
@@ -150,13 +152,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if ((game.levelTimer() >= 15) && (game.overallScore() < 50)) {
         game.gameOver = true;
         game.startTime = Date.now()
-      } else if ((game.levelTimer <= 0) && (game.overallScore() > 50)) {
+      } else if ((game.levelTimer() >= 15) && (game.overallScore() > 50)) {
         finalScore += game.overallScore;
         currentLevel ++;
         startTime = Date.now();
         game.buildLevel(levels[currentLevel]);we
       }
     
+    }, 100)
         
     }
 

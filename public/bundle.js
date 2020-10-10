@@ -531,9 +531,9 @@ class Game {
         }
     }
 
-    playLevel(level) {
-        this.levelStart = Date.now()
-    }
+    // playLevel(level) {
+    //     this.levelStart = Date.now()
+    // }
 
     levelTimer() {
          const levelTime =  (Date.now() - this.startTime) / 1000;
@@ -549,7 +549,7 @@ class Game {
         this.allCircles().forEach(circle => (circle.draw(ctx)));
         this.allCircles().forEach(circle => (circle.grow()))
         this.checkCollisions();
-        // console.log(this.overallScore())
+       
     }
 
     checkCollisions() {
@@ -792,7 +792,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // }
     game.buildLevel(levels[currentLevel]);
     
-
+    window.setInterval(function() {
+       console.log(game.overallScore())
+        console.log(game.levelTimer())
       if(game.gameOver) {
         finalScore = playerScore;
         //logic for firebase
@@ -808,13 +810,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if ((game.levelTimer() >= 15) && (game.overallScore() < 50)) {
         game.gameOver = true;
         game.startTime = Date.now()
-      } else if ((game.levelTimer <= 0) && (game.overallScore() > 50)) {
+      } else if ((game.levelTimer() >= 15) && (game.overallScore() > 50)) {
         finalScore += game.overallScore;
         currentLevel ++;
         startTime = Date.now();
         game.buildLevel(levels[currentLevel]);we
       }
     
+    }, 100)
         
     }
 
