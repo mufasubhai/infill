@@ -154,9 +154,16 @@ document.addEventListener("DOMContentLoaded", () => {
         game.startTime = Date.now()
       } else if ((game.levelTimer() >= 15) && (game.overallScore() > 50)) {
         finalScore += game.overallScore;
-        currentLevel ++;
+        ;
+        // console.log(currentLevel)
+        // console.log(levels[currentLevel])
         startTime = Date.now();
-        game.buildLevel(levels[currentLevel]);we
+        game.friendlyCircles = [];
+        game.enemyCircles = [];
+        ctx.clearRect(0, 0, 1200, 800);
+        console.log(currentLevel)
+        game.buildLevel(levels[currentLevel + 1]);
+        currentLevel += 1;
       }
     
     }, 100)
