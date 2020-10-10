@@ -12,6 +12,10 @@ class Game {
     }
 
     buildLevel(level) {
+        let levelEnemyCircles = [];
+        let levelFriendlyCircles = [];
+        // console.log('build-level-game')
+
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
@@ -31,7 +35,7 @@ class Game {
                         isGrowing: 0,
                     })
 
-                    this.enemyCircles.push(circle)
+                    levelEnemyCircles.push(circle)
 
                 } else if (level[i][j] === 2) {
                     let circleX = 65 * i;
@@ -51,10 +55,12 @@ class Game {
                        isGrowing: 0,
                      });
 
-                    this.friendlyCircles.push(circle);
+                    levelFriendlyCircles.push(circle);
                 } 
             }
         }
+        this.enemyCircles = levelEnemyCircles;
+        this.friendlyCircles = levelFriendlyCircles;
     }
 
     // playLevel(level) {
@@ -93,16 +99,22 @@ class Game {
     }
 
     enemyCircleScore() {
-        const rads = this.enemyCircles.map(circle => circle.rad);
-        return rads.reduce((a, b) => (a + b));
+      
+
+            const rads = this.enemyCircles.map(circle => circle.rad);
+            return rads.reduce((a, b) => (a + b));
+      
     }
 
     friendlyCircleScore() {
-        const rads = this.friendlyCircles.map(circle => circle.rad);
-        return rads.reduce((a, b) => (a + b));
+   
+            const rads = this.friendlyCircles.map(circle => circle.rad);
+            return rads.reduce((a, b) => (a + b));
+   
     }
  
     overallScore() {
+
         return (this.friendlyCircleScore() / (this.enemyCircleScore() + this.friendlyCircleScore())) * 100;
     }
 }

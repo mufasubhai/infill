@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
   // ctx.fillText(`${game.overallScore()}`, 60, 90);
   
-  const gameLoop = () => {
+  const gameLoop = (level) => {
     
     // ctx.font = '38px 48px serif';
     // ctx.fillStyle = 'black';
@@ -132,14 +132,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // playLevel(level) {
     //     this.levelStart = Date.now
     // }
-    game.buildLevel(levels[currentLevel]);
     
-    window.setInterval(function() {
+  //  game.enemyCircles = [];
+  //   game.friendlyCircles = [];
+    ctx.clearRect(0,0,1200,800)
+    game.buildLevel(levels[level]);
+    let currentLevelLoop = window.setInterval(function() {
        console.log(game.overallScore())
         console.log(game.levelTimer())
+
+
+      console.log(level)
       if(game.gameOver) {
         finalScore = playerScore;
-        //logic for firebase
+        //logic for fireb1ase
         // const gameOverModal = document.getElementById('gameover_modal');
       }
 
@@ -148,29 +154,23 @@ document.addEventListener("DOMContentLoaded", () => {
         game.gameOver = true;
         // const winnerWinnerModal = document.getElementById('winner_winner')
       }
-        console.log(game.friendlyCircles)
-      if ((game.levelTimer() >= 15) && (game.overallScore() < 50)) {
+        // console.log(game.friendlyCircles[1])
+      if ((game.levelTimer() >= 5) && (game.overallScore() < 50)) {
         game.gameOver = true;
         game.startTime = Date.now()
         ctx.clearRect(0, 0, 1200, 800);
-           game.friendlyCircles = [];
-        game.enemyCircles = [];
+                clearInterval(currentLevelLoop)
 
-      } else if ((game.levelTimer() >= 15) && (game.overallScore() > 50)) {
-        finalScore += game.overallScore;
-        ;
-        // console.log(currentLevel)
-        // console.log(levels[currentLevel])
-        startTime = Date.now();
-        game.friendlyCircles = [];
-        game.enemyCircles = [];
-        ctx.clearRect(0, 0, 1200, 800);
-        console.log(currentLevel)
-        game.buildLevel(levels[currentLevel + 1]);
-        currentLevel += 1;
-      }
     
-    }, 100)
+     
+      } else if ((game.levelTimer() >= 5) && (game.overallScore() > 50)) {
+        clearInterval(currentLevelLoop)
+        ctx.clearRect(0, 0, 1200, 800);
+        game.startTime = Date.now();
+        gameLoop(level+1)
+      }
+      
+    }, 200)
         
     }
 
@@ -178,15 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
     
   
 //     0: friendlyCircle { 
-// area: 1934.4424626135142,
-// color: "#28a641",
-// growSpeed: 0.19,
+// area: 0,
+// color: "",
+// growSpeed: 0,
 // isGrowing: 1,
 // maxRad: 500,
-// pos: [0,2],git
-
+// pos: [0,0]
   // }
-  gameLoop();
+  gameLoop(1);  
 
   
 
