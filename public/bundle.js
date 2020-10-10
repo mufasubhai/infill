@@ -481,6 +481,8 @@ class Game {
         this.enemyCircles = [];
         this.friendlyCircles = [];
         this.gameOver = false;
+        this.levelStart = null;
+        this.startTime = Date.now();
     }
 
     buildLevel(level) {
@@ -530,11 +532,12 @@ class Game {
     }
 
     playLevel(level) {
-        this.startTime = Date.now
+        this.levelStart = Date.now()
     }
 
     levelTimer() {
-        return (Date.now() - startTime) / 1000
+         const levelTime =  (Date.now() - this.startTime) / 1000;
+        return levelTime
     }
 
     allCircles() {
@@ -546,6 +549,7 @@ class Game {
         this.allCircles().forEach(circle => (circle.draw(ctx)));
         this.allCircles().forEach(circle => (circle.grow()))
         this.checkCollisions();
+        // console.log(this.overallScore())
     }
 
     checkCollisions() {
@@ -573,9 +577,7 @@ class Game {
     }
  
     overallScore() {
-        const overall = (this.friendlyCircleScore() / (this.enemyCircleScore() + this.friendlyCircleScore())) * 100;
-       
-        return overall;
+        return (this.friendlyCircleScore() / (this.enemyCircleScore() + this.friendlyCircleScore())) * 100;
     }
 }
 
@@ -681,12 +683,38 @@ const GameView = __webpack_require__(/*! ./components/game_view */ "./public/jav
 
 document.addEventListener("DOMContentLoaded", () => {
   
-  document.body.addEventListener("keydown", (e) => {
-    keys[e.keyCode] = true;
-  });
-  document.body.addEventListener("keyup", (e) => {
-    keys[e.keyCode] = false;
-  });
+  // document.body.addEventListener("keydown", (e) => {
+  //   keys[e.keyCode] = true;
+  // });
+  // document.body.addEventListener("keyup", (e) => {
+  //   keys[e.keyCode] = false;
+  // });
+
+    // document.getElementById("mute-audio").addEventListener("click", (e) => {
+    //   const music = document.getElementById("music");
+    //   if (music.muted === false) {
+    //     music.muted = true;
+    //     document.getElementById("mute-audio-img").src =
+    //       "./assets/img/icons/music-off.png";
+    //   } else {
+    //     music.muted = false;
+    //     document.getElementById("mute-audio-img").src =
+    //       "./assets/img/icons/music-on.png";
+    //   }
+    // });
+
+
+    // document.getElementById("game-over-yes").addEventListener("click", (e) => {
+    //   const modal = document.getElementById("game-over-modal");
+    //   modal.style.display = "none";
+    //   restartLevel();
+    //   requestAnimationFrame(update);
+    // });
+
+    // document.getElementById("game-over-no").addEventListener("click", (e) => {
+    //   const modal = document.getElementById("game-over-modal");
+    //   modal.style.display = "none";
+    // });
 
   const canvas = document.getElementById("game-canvas");
   canvas.width = "1100";
@@ -700,28 +728,32 @@ document.addEventListener("DOMContentLoaded", () => {
   let startText = `Phase ${currentLevel} commence.`;
   let startTime = Date.now();
   let playerScore = 0;
-  //game.overallScore()
+  let finalScore = 0
   let currentLevelScore = 0;
+  const levelTimer = 20000 - (Date.now() - startTime) / 1000
   
   //  window.ctx = ctx;
   //  window.Circle = Circle;
   //  window.Game = Game;
-  new GameView(ctx, game).start(); //puy in loop?
-  game.buildLevel(levels[currentLevel]); // put in game loop
+  new GameView(ctx, game).start(); //put in loop?
+  // game.buildLevel(levels[currentLevel]); // put in game loop
+  // 
   
   let clearWelcome = window.setInterval( ()  => {
     startText = '';
   }, 2000);
 
   const restartGame = () => {
-    game.gameOver = false;
+  game.gameOver = false;
     currentLevel = 1;
-    startTime = Date.now();
+    playerScore = 0;
+    finalScore = 0;
+    currentLevelScore = 0;
+    game.startTime = Date.now();
   }
 
-  const levelTimer = () => {
-   20000 - (Date.now() - startTime) / 1000
-  }
+   
+  
 
   function isIntersect(point, circle) {
     return Object(_components_util__WEBPACK_IMPORTED_MODULE_3__["dist"])(point[0],point[1], circle.pos[0],circle.pos[1]) < circle.rad;
@@ -741,37 +773,54 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   })
-
-
+  
+  // ctx.font = '40px serif';
+  // ctx.fillStyle = '#FFFFFF';
+  // ctx.fillText(`poop`, 100  ,100)
  
-
+  // ctx.fillText(`${game.overallScore()}`, 60, 90);
+  
   const gameLoop = () => {
-    if(game.gameOver) {
-      const gameOverModal = document.getElementById('gameover_modal');
-      const finalScore = playerScore;
+    
+    // ctx.font = '38px 48px serif';
+    // ctx.fillStyle = 'black';
+    // ctx.fillText(`${game.levelTimer()}`, 20, 30);
+    // console.log(game.overallScore())
+    
+    // playLevel(level) {
+    //     this.levelStart = Date.now
+    // }
+    game.buildLevel(levels[currentLevel]);
+    
 
-      
-      if (levelTimer <= 0) {
-        currentLevel ++;
-      } 
+      if(game.gameOver) {
+        finalScore = playerScore;
+        //logic for firebase
+        // const gameOverModal = document.getElementById('gameover_modal');
+      }
 
       if (currentLevel > Object.keys(levels).length - 1 ) {
+        finalScore += game.overallScore;
         game.gameOver = true;
-      } else {
-          
+        // const winnerWinnerModal = document.getElementById('winner_winner')
       }
-
-
-
-      const startOver = (e) => {
-        // click
         
+      if ((game.levelTimer() >= 15) && (game.overallScore() < 50)) {
+        game.gameOver = true;
+        game.startTime = Date.now()
+      } else if ((game.levelTimer <= 0) && (game.overallScore() > 50)) {
+        finalScore += game.overallScore;
+        currentLevel ++;
+        startTime = Date.now();
+        game.buildLevel(levels[currentLevel]);we
       }
-
-
-    }
     
-  }
+        
+    }
+
+
+    
+  
 
   gameLoop();
 

@@ -7,6 +7,8 @@ class Game {
         this.enemyCircles = [];
         this.friendlyCircles = [];
         this.gameOver = false;
+        this.levelStart = null;
+        this.startTime = Date.now();
     }
 
     buildLevel(level) {
@@ -56,11 +58,12 @@ class Game {
     }
 
     playLevel(level) {
-        this.startTime = Date.now
+        this.levelStart = Date.now()
     }
 
     levelTimer() {
-        return (Date.now() - startTime) / 1000
+         const levelTime =  (Date.now() - this.startTime) / 1000;
+        return levelTime
     }
 
     allCircles() {
@@ -72,6 +75,7 @@ class Game {
         this.allCircles().forEach(circle => (circle.draw(ctx)));
         this.allCircles().forEach(circle => (circle.grow()))
         this.checkCollisions();
+        // console.log(this.overallScore())
     }
 
     checkCollisions() {
@@ -99,9 +103,7 @@ class Game {
     }
  
     overallScore() {
-        const overall = (this.friendlyCircleScore() / (this.enemyCircleScore() + this.friendlyCircleScore())) * 100;
-       
-        return overall;
+        return (this.friendlyCircleScore() / (this.enemyCircleScore() + this.friendlyCircleScore())) * 100;
     }
 }
 
