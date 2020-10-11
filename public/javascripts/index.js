@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // const winnerWinnerModal = document.getElementById('winner_winner')
         }
           // console.log(game.friendlyCircles[1])
-        if ((game.levelTimer() >= 5) && (game.overallScore() < 50)) {
+        if ((game.levelTimer() >= 15) && (game.overallScore() < 50)) {
           game.gameOver = true;
           game.startTime = Date.now()
           gameView.pause = true;
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
           
           
           
-        } else if ((game.levelTimer() >= 5) && (game.overallScore() > 50)) {
+        } else if ((game.levelTimer() >= 15) && (game.overallScore() > 50)) {
           
           //message level + 1
           playerScore += game.overallScore;
@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
           gameView.pause = true;
           ctx.clearRect(0, 0, 1200, 800);
           
-          let timed = 10;
+          let timed = 5;
          
           let restartTimer = setInterval(function(){
             if (timed >= 0) {
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gameLoop(level+1)
             game.startTime = Date.now();
 
-          }, 11000)
+          }, 6000)
          
         }
         

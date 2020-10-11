@@ -45494,14 +45494,12 @@ class Circle {
         return centerDist  < this.rad + oCirc.rad + 2;
     } 
 
-    collideWith(object) {
-   
+    collideWith(object) {   
     }
 
 
     playSound() {
-        const synth = new tone__WEBPACK_IMPORTED_MODULE_1__["Synth"]().toDestination();
-        synth.triggerAttackRelease("C4", "8n");
+
     }
 
     grow() {
@@ -45748,6 +45746,9 @@ const Gradients = [
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _circle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./circle */ "./public/javascripts/components/circle.js");
 /* harmony import */ var _friendly_circle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./friendly_circle */ "./public/javascripts/components/friendly_circle.js");
+/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/esm/index.js");
+
+
 
 
 
@@ -45767,9 +45768,49 @@ class enemyCircle extends _circle__WEBPACK_IMPORTED_MODULE_0__["default"] {
       setInterval(() => (this.isGrowing = 0), time)
   }
 
-  // playSound() {
+  playSound() {
+  
+        let tones = [
+            "eb4",
+            "eb3",
+            "eb2",
+            "eb5",
+            "f2",
+            "f3",
+            "f4",
+            "f5",
+            "ab2",
+            "ab3",
+            "ab4",
+            "c1",
+            "c2",
+            "c3",
+            "c4",
+            "c5",
+            "db2",
+            "db3",
+            "db4",
+            "db5"
+        ]
 
-  // }
+        let notes = [
+            "1n",
+            "2n",
+            "3n",
+            "4n",
+            "8n",
+            "16n"
+        ]
+
+        let randomNote = notes[Math.floor(Math.random() * 5)]
+        let randomTone = tones[Math.floor(Math.random() * 19)]
+                    
+        
+        const pingPong = new tone__WEBPACK_IMPORTED_MODULE_2__["PingPongDelay"]("1n", 0.5).toDestination();
+        // const synth = new Tone.AMSynth().toDestination().connect(pingPong);
+        const synth = new tone__WEBPACK_IMPORTED_MODULE_2__["AMSynth"]().toDestination()
+        synth.triggerAttackRelease(randomTone, randomNote);
+  }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (enemyCircle);
@@ -45789,6 +45830,9 @@ class enemyCircle extends _circle__WEBPACK_IMPORTED_MODULE_0__["default"] {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _circle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./circle */ "./public/javascripts/components/circle.js");
 /* harmony import */ var _enemy_circle__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./enemy_circle */ "./public/javascripts/components/enemy_circle.js");
+/* harmony import */ var tone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tone */ "./node_modules/tone/build/esm/index.js");
+
+
 
 
 
@@ -45804,9 +45848,69 @@ class friendlyCircle extends _circle__WEBPACK_IMPORTED_MODULE_0__["default"] {
     }
     speedGrowth(time) {
         const oldSpeed = this.growSpeed;
-      this.growSpeed *= 3;
-      setInterval(() => (this.growSpeed = oldSpeed), time)
+        this.growSpeed *= 3;
+        setInterval(() => (this.growSpeed = oldSpeed), time)
+    }
+    
+    playSound() {
 
+        let tones = [
+            "eb4",
+            "eb3",
+            "eb2",
+            "eb5",
+            "f2",
+            "f3",
+            "f4",
+            "f5",
+            "ab2",
+            "ab3",
+            "ab4",
+            "c1",
+            "c2",
+            "c3",
+            "c4",
+            "c5",
+            "db2",
+            "db3",
+            "db4",
+            "db5"
+        ]
+
+        let notes = [
+            "1n",
+            "2n",
+            "3n",
+            "4n",
+            "8n",
+            "16n"
+        ]
+
+        // performance hit with ping pong delay
+        // let delayNotes = [
+        //     "1n",
+        //     "2n",
+        //     "3n"
+        // ]
+
+        // let delayDelays = [
+        //     .1,
+        //     .2,
+        //     .3,
+        //     .4
+        // ]
+
+
+        let randomNote = notes[Math.floor(Math.random() * 5)]
+        let randomTone = tones[Math.floor(Math.random() * 19)]
+        // let randomDelayNote = delayNotes[Math.floor(Math.random() * 2)]
+        // let randomDelay = delayDelays[Math.floor(Math.random() * 3)]
+                    
+        
+        // const pingPong = new Tone.PingPongDelay(randomDelayNote, randomDelay).toDestination();
+        // const synth = new Tone.Synth().toDestination().connect(pingPong);
+        const synth = new tone__WEBPACK_IMPORTED_MODULE_2__["Synth"]().toDestination()
+        synth.triggerAttackRelease(randomTone, randomNote);
     }
 }
 
@@ -46203,7 +46307,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // const winnerWinnerModal = document.getElementById('winner_winner')
         }
           // console.log(game.friendlyCircles[1])
-        if ((game.levelTimer() >= 5) && (game.overallScore() < 50)) {
+        if ((game.levelTimer() >= 15) && (game.overallScore() < 50)) {
           game.gameOver = true;
           game.startTime = Date.now()
           gameView.pause = true;
@@ -46213,7 +46317,7 @@ document.addEventListener("DOMContentLoaded", () => {
           
           
           
-        } else if ((game.levelTimer() >= 5) && (game.overallScore() > 50)) {
+        } else if ((game.levelTimer() >= 15) && (game.overallScore() > 50)) {
           
           //message level + 1
           playerScore += game.overallScore;
@@ -46222,7 +46326,7 @@ document.addEventListener("DOMContentLoaded", () => {
           gameView.pause = true;
           ctx.clearRect(0, 0, 1200, 800);
           
-          let timed = 10;
+          let timed = 5;
          
           let restartTimer = setInterval(function(){
             if (timed >= 0) {
@@ -46239,7 +46343,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gameLoop(level+1)
             game.startTime = Date.now();
 
-          }, 11000)
+          }, 6000)
          
         }
         

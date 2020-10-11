@@ -55,14 +55,12 @@ class Circle {
         return centerDist  < this.rad + oCirc.rad + 2;
     } 
 
-    collideWith(object) {
-   
+    collideWith(object) {   
     }
 
 
     playSound() {
-        const synth = new Tone.Synth().toDestination();
-        synth.triggerAttackRelease("C4", "8n");
+
     }
 
     grow() {
