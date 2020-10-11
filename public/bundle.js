@@ -46172,11 +46172,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   document.getElementById('music').addEventListener("click", (e) => {
+    let music = document.getElementById('music');
     if (tone__WEBPACK_IMPORTED_MODULE_6__["Master"].mute === true) {
       tone__WEBPACK_IMPORTED_MODULE_6__["Master"].mute = false;
+      music.innerHTML = "Mute Sound"
       console.log(tone__WEBPACK_IMPORTED_MODULE_6__["Master"].mute)
     } else {
       tone__WEBPACK_IMPORTED_MODULE_6__["Master"].mute = true;
+      music.innerHTML = "Unmute Sound"
       console.log(tone__WEBPACK_IMPORTED_MODULE_6__["Master"].mute)
     }
   })
