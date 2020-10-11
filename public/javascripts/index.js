@@ -182,14 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
           playerScore += game.overallScore;
           // gameView.stop();
           clearInterval(currentLevelLoop)
-          
+          gameView.pause = true;
           
           setTimeout(function() {
+            gameView.pause = false;
+            gameView.start();
             ctx.clearRect(0, 0, 1200, 800);
             gameLoop(level+1)
             game.startTime = Date.now();
 
-          }, 1000)
+          }, 5000)
          
         }
         
