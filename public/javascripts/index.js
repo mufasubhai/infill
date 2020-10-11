@@ -24,6 +24,37 @@ import * as Tone from 'tone'
 //     }
 // }
 
+
+
+// handleMute(e) {
+//   e.preventDefault
+// }
+
+// <!-- The core Firebase JS SDK is always required and must be listed first -->
+// <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-app.js"></script>
+
+// <!-- TODO: Add SDKs for Firebase products that you want to use
+//      https://firebase.google.com/docs/web/setup#available-libraries -->
+// <script src="https://www.gstatic.com/firebasejs/7.23.0/firebase-analytics.js"></script>
+
+// <script>
+//   // Your web app's Firebase configuration
+//   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//   var firebaseConfig = {
+//     apiKey: "AIzaSyDBjU8qJqQUF48NESEUI9zwYIAPkLDWKYM",
+//     authDomain: "infill-c09a6.firebaseapp.com",
+//     databaseURL: "https://infill-c09a6.firebaseio.com",
+//     projectId: "infill-c09a6",
+//     storageBucket: "infill-c09a6.appspot.com",
+//     messagingSenderId: "269686008412",
+//     appId: "1:269686008412:web:7f71581e3398798da11499",
+//     measurementId: "G-DTBBC0L6Q2"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
+//   firebase.analytics();
+// </script>
+
 document.addEventListener("DOMContentLoaded", () => {
   
   // document.body.addEventListener("keydown", (e) => {
