@@ -45498,9 +45498,9 @@ class Circle {
     }
 
 
-    playSound() {
+    // playSound() {
 
-    }
+    // }
 
     grow() {
         if ((this.rad < this.maxRad) && (this.isGrowing === 0)) {
@@ -45768,49 +45768,49 @@ class enemyCircle extends _circle__WEBPACK_IMPORTED_MODULE_0__["default"] {
       setInterval(() => (this.isGrowing = 0), time)
   }
 
-  playSound() {
+  // playSound() {
   
-        let tones = [
-            "eb4",
-            "eb3",
-            "eb2",
-            "eb5",
-            "f2",
-            "f3",
-            "f4",
-            "f5",
-            "ab2",
-            "ab3",
-            "ab4",
-            "c1",
-            "c2",
-            "c3",
-            "c4",
-            "c5",
-            "db2",
-            "db3",
-            "db4",
-            "db5"
-        ]
+  //       let tones = [
+  //           "eb4",
+  //           "eb3",
+  //           "eb2",
+  //           "eb5",
+  //           "f2",
+  //           "f3",
+  //           "f4",
+  //           "f5",
+  //           "ab2",
+  //           "ab3",
+  //           "ab4",
+  //           "c1",
+  //           "c2",
+  //           "c3",
+  //           "c4",
+  //           "c5",
+  //           "db2",
+  //           "db3",
+  //           "db4",
+  //           "db5"
+  //       ]
 
-        let notes = [
-            "1n",
-            "2n",
-            "3n",
-            "4n",
-            "8n",
-            "16n"
-        ]
+  //       let notes = [
+  //           "1n",
+  //           "2n",
+  //           "3n",
+  //           "4n",
+  //           "8n",
+  //           "16n"
+  //       ]
 
-        let randomNote = notes[Math.floor(Math.random() * 5)]
-        let randomTone = tones[Math.floor(Math.random() * 19)]
+  //       let randomNote = notes[Math.floor(Math.random() * 5)]
+  //       let randomTone = tones[Math.floor(Math.random() * 19)]
+  //       synth.triggerAttackRelease(randomTone, randomNote);
                     
         
-        const pingPong = new tone__WEBPACK_IMPORTED_MODULE_2__["PingPongDelay"]("1n", 0.5).toDestination();
-        // const synth = new Tone.AMSynth().toDestination().connect(pingPong);
-        const synth = new tone__WEBPACK_IMPORTED_MODULE_2__["AMSynth"]().toDestination()
-        synth.triggerAttackRelease(randomTone, randomNote);
-  }
+  //       const pingPong = new Tone.PingPongDelay("1n", 0.5).toDestination();
+  //       const synth = new Tone.AMSynth().toDestination().connect(pingPong);
+  //       const synth = new Tone.AMSynth().toDestination()
+  // }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (enemyCircle);
@@ -45839,6 +45839,7 @@ __webpack_require__.r(__webpack_exports__);
 class friendlyCircle extends _circle__WEBPACK_IMPORTED_MODULE_0__["default"] {
     constructor(options) {
         super(options) 
+
     }
 
     collideWith(object) {
@@ -45852,66 +45853,65 @@ class friendlyCircle extends _circle__WEBPACK_IMPORTED_MODULE_0__["default"] {
         setInterval(() => (this.growSpeed = oldSpeed), time)
     }
     
-    playSound() {
+    // playSound() {
 
-        let tones = [
-            "eb4",
-            "eb3",
-            "eb2",
-            "eb5",
-            "f2",
-            "f3",
-            "f4",
-            "f5",
-            "ab2",
-            "ab3",
-            "ab4",
-            "c1",
-            "c2",
-            "c3",
-            "c4",
-            "c5",
-            "db2",
-            "db3",
-            "db4",
-            "db5"
-        ]
+    //     let tones = [
+    //         "eb4",
+    //         "eb3",
+    //         "eb2",
+    //         "eb5",
+    //         "f2",
+    //         "f3",
+    //         "f4",
+    //         "f5",
+    //         "ab2",
+    //         "ab3",
+    //         "ab4",
+    //         "c1",
+    //         "c2",
+    //         "c3",
+    //         "c4",
+    //         "c5",
+    //         "db2",
+    //         "db3",
+    //         "db4",
+    //         "db5"
+    //     ]
 
-        let notes = [
-            "1n",
-            "2n",
-            "3n",
-            "4n",
-            "8n",
-            "16n"
-        ]
+    //     let notes = [
+    //         "1n",
+    //         "2n",
+    //         "3n",
+    //         "4n",
+    //         "8n",
+    //         "16n"
+    //     ]
 
-        // performance hit with ping pong delay
-        // let delayNotes = [
-        //     "1n",
-        //     "2n",
-        //     "3n"
-        // ]
+    //     // performance hit with ping pong delay
+    //     // let delayNotes = [
+    //     //     "1n",
+    //     //     "2n",
+    //     //     "3n"
+    //     // ]
 
-        // let delayDelays = [
-        //     .1,
-        //     .2,
-        //     .3,
-        //     .4
-        // ]
+    //     // let delayDelays = [
+    //     //     .1,
+    //     //     .2,
+    //     //     .3,
+    //     //     .4
+    //     // ]
 
 
-        let randomNote = notes[Math.floor(Math.random() * 5)]
-        let randomTone = tones[Math.floor(Math.random() * 19)]
-        // let randomDelayNote = delayNotes[Math.floor(Math.random() * 2)]
-        // let randomDelay = delayDelays[Math.floor(Math.random() * 3)]
+    //     let randomNote = notes[Math.floor(Math.random() * 5)]
+    //     let randomTone = tones[Math.floor(Math.random() * 19)]
+    //     // let randomDelayNote = delayNotes[Math.floor(Math.random() * 2)]
+    //     // let randomDelay = delayDelays[Math.floor(Math.random() * 3)]
                     
         
-        // const pingPong = new Tone.PingPongDelay(randomDelayNote, randomDelay).toDestination();
-        // const synth = new Tone.Synth().toDestination().connect(pingPong);
-        const synth = new tone__WEBPACK_IMPORTED_MODULE_2__["Synth"]().toDestination()
-        synth.triggerAttackRelease(randomTone, randomNote);
-    }
+    //     // const pingPong = new Tone.PingPongDelay(randomDelayNote, randomDelay).toDestination();
+    //     // const synth = new Tone.Synth().toDestination().connect(pingPong);
+    //     synth.triggerAttackRelease(randomTone, randomNote);
+    // }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (friendlyCircle);
@@ -46199,9 +46199,7 @@ const GameView = __webpack_require__(/*! ./components/game_view */ "./public/jav
 //   firebase.analytics();
 // </script>
 
-document.addEventListener("DOMContentLoaded", () => {
-  
-  // document.body.addEventListener("keydown", (e) => {
+        // document.body.addEventListener("keydown", (e) => {
   //   keys[e.keyCode] = true;
   // });
   // document.body.addEventListener("keyup", (e) => {
@@ -46234,10 +46232,34 @@ document.addEventListener("DOMContentLoaded", () => {
     //   modal.style.display = "none";
     // });
 
+  
+    // const vol = new Tone.Volume(-12).toDestination();
+    // const osc = new Tone.Oscillator().connect(vol).start();
+    // vol.mute = true;
+
+  
+  // document.getElementById('music').addEventListener("click", (e) => {
+  //   e.preventDefault()
+  //   if (document.getElementById("myAudio").muted = true) {
+  //     document.getElementById("myAudio") = false;
+  //   } else {
+  //     document.getElementById("myAudio") = true;
+  //   }
+  // })
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const tones = [ "eb4", "eb3", "eb2", "eb5", "f2", "f3", "f4", "f5", "ab2", "ab3", "ab4", "c1", "c2", "c3", "c4", "c5", "db2", "db3", "db4", "db5" ]
+  const notes = [ "1n", "2n", "3n", "4n", "8n", "16n" ] 
+        
+  const pingPong = new tone__WEBPACK_IMPORTED_MODULE_6__["PingPongDelay"]("2n", .2).toDestination();
+     const vol = new tone__WEBPACK_IMPORTED_MODULE_6__["Volume"](-12).toDestination();
+  const synth1 = new tone__WEBPACK_IMPORTED_MODULE_6__["Synth"]().toDestination().connect(pingPong).connect(vol);
+  const synth2 = new tone__WEBPACK_IMPORTED_MODULE_6__["AMSynth"]().toDestination().connect(pingPong).connect(vol);
   const canvas = document.getElementById("game-canvas");
-  canvas.width = "1100";
-  canvas.height = "715";
-  canvas.style =  _components_elements__WEBPACK_IMPORTED_MODULE_2__["Gradients"][Math.floor(Math.random() * 12)];  
+      canvas.width = "1100";
+      canvas.height = "715";
+      canvas.style =  _components_elements__WEBPACK_IMPORTED_MODULE_2__["Gradients"][Math.floor(Math.random() * 12)];  
 
   const ctx = canvas.getContext("2d");
   const levels = _components_elements__WEBPACK_IMPORTED_MODULE_2__["Levels"];
@@ -46248,16 +46270,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let playerScore = 0;
   let finalScore = 0
   let currentLevelScore = 0;
-  const levelTimer = 20000 - (Date.now() - startTime) / 1000
-  
+  let gameView = new GameView(ctx, game)
+  gameView.start();
+vol.mute = true;
+
+
+  // const levelTimer = 20000 - (Date.now() - startTime) / 1000
   //  window.ctx = ctx;
   //  window.Circle = Circle;
   //  window.Game = Game;
-  let gameView = new GameView(ctx, game)
-  gameView.start();
-  // 
-            // gameView.stop();
-
+  // gameView.stop();
   //put in loop?
   // game.buildLevel(levels[currentLevel]); // put in game loop
   // 
@@ -46275,9 +46297,7 @@ document.addEventListener("DOMContentLoaded", () => {
     game.startTime = Date.now();
   }
 
-   
   
-
   function isIntersect(point, circle) {
     return Object(_components_util__WEBPACK_IMPORTED_MODULE_3__["dist"])(point[0],point[1], circle.pos[0],circle.pos[1]) < circle.rad;
   }
@@ -46291,10 +46311,15 @@ document.addEventListener("DOMContentLoaded", () => {
     game.allCircles().forEach(circle => {
       if (isIntersect(pos, circle) && (circle instanceof _components_enemy_circle__WEBPACK_IMPORTED_MODULE_4__["default"])) {
         circle.pauseGrowth(3000);
-        circle.playSound();
+        let randomNote = notes[Math.floor(Math.random() * 5)]
+        let randomTone = tones[Math.floor(Math.random() * 19)]
+        synth1.triggerAttackRelease(randomTone, randomNote);
       } else if (isIntersect(pos, circle) && (circle instanceof _components_friendly_circle__WEBPACK_IMPORTED_MODULE_5__["default"])) {
         circle.speedGrowth(1000);
-        circle.playSound();
+        let randomNote = notes[Math.floor(Math.random() * 5)]
+        let randomTone = tones[Math.floor(Math.random() * 19)]
+        synth2.triggerAttackRelease(randomTone, randomNote);
+
       }
     })
   })
@@ -46302,7 +46327,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.font = '40px serif';
   // ctx.fillStyle = '#FFFFFF';
   // ctx.fillText(`poop`, 100  ,100)
- 
   // ctx.fillText(`${game.overallScore()}`, 60, 90);
   
   const gameLoop = (level) => {
@@ -46310,7 +46334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.font = '38px 48px serif';
     ctx.fillStyle = 'black';
     ctx.fillText(`poopity poop`, 20, 30);
-
+    // canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
 
 
 

@@ -59,9 +59,9 @@ class Circle {
     }
 
 
-    playSound() {
+    // playSound() {
 
-    }
+    // }
 
     grow() {
         if ((this.rad < this.maxRad) && (this.isGrowing === 0)) {

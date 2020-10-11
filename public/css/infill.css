@@ -40,12 +40,12 @@
 
 }
 
-.music {
+#music {
     align-self: center;
     padding-top: 30px;
 
 }
-.music:hover {
+#music:hover {
     color: #284aa6;
     text-shadow: 3px 3px  #ac13d6;;
     cursor: pointer;

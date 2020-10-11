@@ -55,9 +55,7 @@ import * as Tone from 'tone'
 //   firebase.analytics();
 // </script>
 
-document.addEventListener("DOMContentLoaded", () => {
-  
-  // document.body.addEventListener("keydown", (e) => {
+        // document.body.addEventListener("keydown", (e) => {
   //   keys[e.keyCode] = true;
   // });
   // document.body.addEventListener("keyup", (e) => {
@@ -90,10 +88,34 @@ document.addEventListener("DOMContentLoaded", () => {
     //   modal.style.display = "none";
     // });
 
+  
+    // const vol = new Tone.Volume(-12).toDestination();
+    // const osc = new Tone.Oscillator().connect(vol).start();
+    // vol.mute = true;
+
+  
+  // document.getElementById('music').addEventListener("click", (e) => {
+  //   e.preventDefault()
+  //   if (document.getElementById("myAudio").muted = true) {
+  //     document.getElementById("myAudio") = false;
+  //   } else {
+  //     document.getElementById("myAudio") = true;
+  //   }
+  // })
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  const tones = [ "eb4", "eb3", "eb2", "eb5", "f2", "f3", "f4", "f5", "ab2", "ab3", "ab4", "c1", "c2", "c3", "c4", "c5", "db2", "db3", "db4", "db5" ]
+  const notes = [ "1n", "2n", "3n", "4n", "8n", "16n" ] 
+        
+  const pingPong = new Tone.PingPongDelay("2n", .2).toDestination();
+     const vol = new Tone.Volume(-12).toDestination();
+  const synth1 = new Tone.Synth().toDestination().connect(pingPong).connect(vol);
+  const synth2 = new Tone.AMSynth().toDestination().connect(pingPong).connect(vol);
   const canvas = document.getElementById("game-canvas");
-  canvas.width = "1100";
-  canvas.height = "715";
-  canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
+      canvas.width = "1100";
+      canvas.height = "715";
+      canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
 
   const ctx = canvas.getContext("2d");
   const levels = Levels;
@@ -104,16 +126,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let playerScore = 0;
   let finalScore = 0
   let currentLevelScore = 0;
-  const levelTimer = 20000 - (Date.now() - startTime) / 1000
-  
+  let gameView = new GameView(ctx, game)
+  gameView.start();
+vol.mute = true;
+
+
+  // const levelTimer = 20000 - (Date.now() - startTime) / 1000
   //  window.ctx = ctx;
   //  window.Circle = Circle;
   //  window.Game = Game;
-  let gameView = new GameView(ctx, game)
-  gameView.start();
-  // 
-            // gameView.stop();
-
+  // gameView.stop();
   //put in loop?
   // game.buildLevel(levels[currentLevel]); // put in game loop
   // 
@@ -131,9 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     game.startTime = Date.now();
   }
 
-   
   
-
   function isIntersect(point, circle) {
     return dist(point[0],point[1], circle.pos[0],circle.pos[1]) < circle.rad;
   }
@@ -147,10 +167,15 @@ document.addEventListener("DOMContentLoaded", () => {
     game.allCircles().forEach(circle => {
       if (isIntersect(pos, circle) && (circle instanceof enemyCircle)) {
         circle.pauseGrowth(3000);
-        circle.playSound();
+        let randomNote = notes[Math.floor(Math.random() * 5)]
+        let randomTone = tones[Math.floor(Math.random() * 19)]
+        synth1.triggerAttackRelease(randomTone, randomNote);
       } else if (isIntersect(pos, circle) && (circle instanceof friendlyCircle)) {
         circle.speedGrowth(1000);
-        circle.playSound();
+        let randomNote = notes[Math.floor(Math.random() * 5)]
+        let randomTone = tones[Math.floor(Math.random() * 19)]
+        synth2.triggerAttackRelease(randomTone, randomNote);
+
       }
     })
   })
@@ -158,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.font = '40px serif';
   // ctx.fillStyle = '#FFFFFF';
   // ctx.fillText(`poop`, 100  ,100)
- 
   // ctx.fillText(`${game.overallScore()}`, 60, 90);
   
   const gameLoop = (level) => {
@@ -166,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.font = '38px 48px serif';
     ctx.fillStyle = 'black';
     ctx.fillText(`poopity poop`, 20, 30);
-
+    // canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
 
 
 
