@@ -608,19 +608,31 @@ class GameView {
     constructor(ctx, game) {
         this.ctx = ctx;
         this.game = game;
-
+        this.pause = false;
     }
 
     start() {
-        requestAnimationFrame(this.animate.bind(this))
+        
+            requestAnimationFrame(this.animate.bind(this))
+        
+       
     }
     
     animate () {
-        this.game.draw(this.ctx);
-        requestAnimationFrame(this.animate.bind(this))
+        if (!this.pause) {
+
+            this.game.draw(this.ctx);
+           requestAnimationFrame(this.animate.bind(this))
+        }
     }
   
-    // bindKeyHandlers() {
+   
+    // stop() {
+    //     if (this.animationFrame) {
+    //         cancelAnimationFrame(this.animationFrame)
+    //         this.animationFrame = undefined;
+
+    //     }
     // }
 }
 
@@ -747,7 +759,12 @@ document.addEventListener("DOMContentLoaded", () => {
   //  window.ctx = ctx;
   //  window.Circle = Circle;
   //  window.Game = Game;
-  new GameView(ctx, game).start(); //put in loop?
+  let gameView = new GameView(ctx, game)
+  gameView.start();
+  // 
+            // gameView.stop();
+
+  //put in loop?
   // game.buildLevel(levels[currentLevel]); // put in game loop
   // 
   
@@ -806,9 +823,11 @@ document.addEventListener("DOMContentLoaded", () => {
   //  game.enemyCircles = [];
   //   game.friendlyCircles = [];
     ctx.clearRect(0,0,1200,800)
+    game.buildLevel(levels[level]);
+    // gameView.start();
+    // gameView.stop()
 
 
-      game.buildLevel(levels[level]);
       let currentLevelLoop = window.setInterval(function() {
          console.log(game.overallScore())
           console.log(game.levelTimer())
@@ -832,19 +851,27 @@ document.addEventListener("DOMContentLoaded", () => {
         if ((game.levelTimer() >= 5) && (game.overallScore() < 50)) {
           game.gameOver = true;
           game.startTime = Date.now()
-          ctx.clearRect(0, 0, 1200, 800);
-                  clearInterval(currentLevelLoop)
-  
-      
-       
-        } else if ((game.levelTimer() >= 5) && (game.overallScore() > 50)) {
+          gameView.pause = true;
 
+          // ctx.clearRect(0, 0, 1200, 800);
+          clearInterval(currentLevelLoop)
+          
+          
+          
+        } else if ((game.levelTimer() >= 5) && (game.overallScore() > 50)) {
+          
           //message level + 1
           playerScore += game.overallScore;
+          // gameView.stop();
           clearInterval(currentLevelLoop)
-          ctx.clearRect(0, 0, 1200, 800);
-            game.startTime = Date.now();
+          
+          
+          setTimeout(function() {
+            ctx.clearRect(0, 0, 1200, 800);
             gameLoop(level+1)
+            game.startTime = Date.now();
+
+          }, 1000)
          
         }
         
