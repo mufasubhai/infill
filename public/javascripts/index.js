@@ -6,6 +6,7 @@ import { Levels, Gradients } from "./components/elements";
 import { dist } from './components/util'
 import enemyCircle from './components/enemy_circle'
 import friendlyCircle from './components/friendly_circle'
+import * as Tone from 'tone'
 
 
 // handleMusic(e) {
@@ -115,8 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
     game.allCircles().forEach(circle => {
       if (isIntersect(pos, circle) && (circle instanceof enemyCircle)) {
         circle.pauseGrowth(3000);
+        circle.playSound();
       } else if (isIntersect(pos, circle) && (circle instanceof friendlyCircle)) {
         circle.speedGrowth(1000);
+        circle.playSound();
       }
     })
   })
@@ -138,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ctx.clearRect(0,0,1200,800)
     game.buildLevel(levels[level]);
-   
+
 
 
       let currentLevelLoop = window.setInterval(function() {
@@ -196,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
             gameLoop(level+1)
             game.startTime = Date.now();
 
-          }, 10000)
+          }, 11000)
          
         }
         

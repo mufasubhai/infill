@@ -1,5 +1,7 @@
 
 import {dist} from './util'
+import * as Tone from 'tone'
+
 
 class Circle {
     constructor(opts) {
@@ -55,6 +57,12 @@ class Circle {
 
     collideWith(object) {
    
+    }
+
+
+    playSound() {
+        const synth = new Tone.Synth().toDestination();
+        synth.triggerAttackRelease("C4", "8n");
     }
 
     grow() {

@@ -16,6 +16,10 @@ class enemyCircle extends Circle {
       this.isGrowing = 1;
       setInterval(() => (this.isGrowing = 0), time)
   }
+
+  // playSound() {
+
+  // }
 }
 
 export default enemyCircle;

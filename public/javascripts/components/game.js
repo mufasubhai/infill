@@ -1,5 +1,7 @@
 import friendlyCircle from './friendly_circle'
 import enemyCircle from './enemy_circle'
+import * as Tone from 'tone'
+
 
 
 class Game {
@@ -93,6 +95,7 @@ class Game {
 
                 if (circ1.hasCollided(circ2)) {
                     circ1.collideWith(circ2);
+                    // add sound 
                 }
             }
         }
