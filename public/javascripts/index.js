@@ -94,14 +94,6 @@ import * as Tone from 'tone'
     // vol.mute = true;
 
   
-  // document.getElementById('music').addEventListener("click", (e) => {
-  //   e.preventDefault()
-  //   if (document.getElementById("myAudio").muted = true) {
-  //     document.getElementById("myAudio") = false;
-  //   } else {
-  //     document.getElementById("myAudio") = true;
-  //   }
-  // })
 
 document.addEventListener("DOMContentLoaded", () => {
   
@@ -109,9 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const notes = [ "1n", "2n", "3n", "4n", "8n", "16n" ] 
         
   const pingPong = new Tone.PingPongDelay("2n", .2).toDestination();
-     const vol = new Tone.Volume(-12).toDestination();
-  const synth1 = new Tone.Synth().toDestination().connect(pingPong).connect(vol);
-  const synth2 = new Tone.AMSynth().toDestination().connect(pingPong).connect(vol);
+
+  let synth1 = new Tone.FMSynth().toDestination().connect(pingPong);
+  let synth2 = new Tone.AMSynth().toDestination().connect(pingPong);
+  console.log(synth1)
   const canvas = document.getElementById("game-canvas");
       canvas.width = "1100";
       canvas.height = "715";
@@ -128,7 +121,27 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentLevelScore = 0;
   let gameView = new GameView(ctx, game)
   gameView.start();
-vol.mute = true;
+
+
+  Tone.Master.mute = false;
+
+
+
+  document.getElementById('music').addEventListener("click", (e) => {
+  
+    if (Tone.Master.mute === true) {
+      Tone.Master.mute = false;
+      console.log(Tone.Master.mute)
+    } else {
+      Tone.Master.mute = true;
+      console.log(Tone.Master.mute)
+    }
+  })
+
+
+  
+    // Tone.Master.mute = true; 
+// vol.mute = true;
 
 
   // const levelTimer = 20000 - (Date.now() - startTime) / 1000
@@ -200,8 +213,8 @@ vol.mute = true;
 
 
       let currentLevelLoop = window.setInterval(function() {
-         console.log(game.overallScore().toFixed(4))
-          console.log(game.levelTimer().toFixed(2))
+        //  console.log(game.overallScore().toFixed(4))
+        //   console.log(game.levelTimer().toFixed(2))
   
   
         console.log(level)
