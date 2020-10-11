@@ -128,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   document.getElementById('music').addEventListener("click", (e) => {
-  
     if (Tone.Master.mute === true) {
       Tone.Master.mute = false;
       console.log(Tone.Master.mute)
