@@ -129,32 +129,26 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const gameLoop = (level) => {
     
-    // ctx.font = '38px 48px serif';
-    // ctx.fillStyle = 'black';
-    // ctx.fillText(`${game.levelTimer()}`, 20, 30);
-    // console.log(game.overallScore())
-    
-    // playLevel(level) {
-    //     this.levelStart = Date.now
-    // }
-    
-  //  game.enemyCircles = [];
-  //   game.friendlyCircles = [];
+    ctx.font = '38px 48px serif';
+    ctx.fillStyle = 'black';
+    ctx.fillText(`poopity poop`, 20, 30);
+
+
+
+
     ctx.clearRect(0,0,1200,800)
     game.buildLevel(levels[level]);
-    // gameView.start();
-    // gameView.stop()
+   
 
 
       let currentLevelLoop = window.setInterval(function() {
-         console.log(game.overallScore())
-          console.log(game.levelTimer())
+         console.log(game.overallScore().toFixed(4))
+          console.log(game.levelTimer().toFixed(2))
   
   
         console.log(level)
         if(game.gameOver) {
           finalScore = playerScore;
-          
           
           // const gameOverModal = document.getElementById('gameover_modal');
         }
@@ -183,19 +177,30 @@ document.addEventListener("DOMContentLoaded", () => {
           // gameView.stop();
           clearInterval(currentLevelLoop)
           gameView.pause = true;
+          ctx.clearRect(0, 0, 1200, 800);
           
+          let timed = 10;
+         
+          let restartTimer = setInterval(function(){
+            if (timed >= 0) {
+              console.log(timed)
+              timed -= 1
+            } else {
+              clearInterval(restartTimer)
+            }
+          }, 1000)
+
           setTimeout(function() {
             gameView.pause = false;
             gameView.start();
-            ctx.clearRect(0, 0, 1200, 800);
             gameLoop(level+1)
             game.startTime = Date.now();
 
-          }, 5000)
+          }, 10000)
          
         }
         
-      }, 200)
+      }, 10)
     
         
     }
