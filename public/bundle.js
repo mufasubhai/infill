@@ -46295,6 +46295,8 @@ document.addEventListener("DOMContentLoaded", () => {
           clearInterval(currentLevelLoop)
           gameView.pause = true;
           ctx.clearRect(0, 0, 1200, 800);
+                            canvas.style =  _components_elements__WEBPACK_IMPORTED_MODULE_2__["Gradients"][Math.floor(Math.random() * 12)];  
+
           
           let timed = 5;
          
@@ -46310,6 +46312,7 @@ document.addEventListener("DOMContentLoaded", () => {
           setTimeout(function() {
             gameView.pause = false;
             gameView.start();
+
             gameLoop(level+1)
             game.startTime = Date.now();
 
