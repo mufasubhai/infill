@@ -604,28 +604,7 @@ class Game {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-class GameView {
-    constructor(ctx, game) {
-        this.ctx = ctx;
-        this.game = game;
-
-    }
-
-    start() {
-        requestAnimationFrame(this.animate.bind(this))
-    }
-    
-    animate () {
-        this.game.draw(this.ctx);
-        requestAnimationFrame(this.animate.bind(this))
-    }
-  
-    // bindKeyHandlers() {
-    // }
-}
-
-
-module.exports = GameView;
+throw new Error("Module parse failed: Unexpected token (19:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n|     // bindKeyHandlers() {\n|     // }\n> }\n| \n| ");
 
 /***/ }),
 
@@ -806,41 +785,50 @@ document.addEventListener("DOMContentLoaded", () => {
   //  game.enemyCircles = [];
   //   game.friendlyCircles = [];
     ctx.clearRect(0,0,1200,800)
-    game.buildLevel(levels[level]);
-    let currentLevelLoop = window.setInterval(function() {
-       console.log(game.overallScore())
-        console.log(game.levelTimer())
 
 
-      console.log(level)
-      if(game.gameOver) {
-        finalScore = playerScore;
-        //logic for fireb1ase
-        // const gameOverModal = document.getElementById('gameover_modal');
-      }
-
-      if (currentLevel > Object.keys(levels).length - 1 ) {
-        finalScore += game.overallScore;
-        game.gameOver = true;
-        // const winnerWinnerModal = document.getElementById('winner_winner')
-      }
-        // console.log(game.friendlyCircles[1])
-      if ((game.levelTimer() >= 5) && (game.overallScore() < 50)) {
-        game.gameOver = true;
-        game.startTime = Date.now()
-        ctx.clearRect(0, 0, 1200, 800);
-                clearInterval(currentLevelLoop)
-
-    
-     
-      } else if ((game.levelTimer() >= 5) && (game.overallScore() > 50)) {
-        clearInterval(currentLevelLoop)
-        ctx.clearRect(0, 0, 1200, 800);
-        game.startTime = Date.now();
-        gameLoop(level+1)
-      }
+      game.buildLevel(levels[level]);
+      let currentLevelLoop = window.setInterval(function() {
+         console.log(game.overallScore())
+          console.log(game.levelTimer())
+  
+  
+        console.log(level)
+        if(game.gameOver) {
+          finalScore = playerScore;
+          
+          
+          // const gameOverModal = document.getElementById('gameover_modal');
+        }
+  
+        if (currentLevel > Object.keys(levels).length - 1 ) {
+          finalScore += game.overallScore;
+          game.gameOver = true;
+        
+          // const winnerWinnerModal = document.getElementById('winner_winner')
+        }
+          // console.log(game.friendlyCircles[1])
+        if ((game.levelTimer() >= 5) && (game.overallScore() < 50)) {
+          game.gameOver = true;
+          game.startTime = Date.now()
+          ctx.clearRect(0, 0, 1200, 800);
+                  clearInterval(currentLevelLoop)
+  
       
-    }, 200)
+       
+        } else if ((game.levelTimer() >= 5) && (game.overallScore() > 50)) {
+
+          //message level + 1
+          playerScore += game.overallScore;
+          clearInterval(currentLevelLoop)
+          ctx.clearRect(0, 0, 1200, 800);
+            game.startTime = Date.now();
+            gameLoop(level+1)
+         
+        }
+        
+      }, 200)
+    
         
     }
 

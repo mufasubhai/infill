@@ -13,7 +13,7 @@ class GameView {
         this.game.draw(this.ctx);
         requestAnimationFrame(this.animate.bind(this))
     }
-  
+  git 
     // bindKeyHandlers() {
     // }
 }
