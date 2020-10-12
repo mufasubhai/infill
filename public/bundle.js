@@ -65201,16 +65201,10 @@ const GameView = __webpack_require__(/*! ./components/game_view */ "./public/jav
   };
 //   // Initialize Firebase
   firebase_app__WEBPACK_IMPORTED_MODULE_7__["initializeApp"](firebaseConfig);
-  let fireBaseDB = firebase_app__WEBPACK_IMPORTED_MODULE_7__["database"]();
+  let firebaseDB = firebase_app__WEBPACK_IMPORTED_MODULE_7__["database"]();
 //   firebase.analytics();
 // </script>
 
-        // document.body.addEventListener("keydown", (e) => {
-  //   keys[e.keyCode] = true;
-  // });
-  // document.body.addEventListener("keyup", (e) => {
-  //   keys[e.keyCode] = false;
-  // });
 
 
     // document.getElementById("game-over-yes").addEventListener("click", (e) => {
@@ -65224,6 +65218,7 @@ const GameView = __webpack_require__(/*! ./components/game_view */ "./public/jav
     //   const modal = document.getElementById("game-over-modal");
     //   modal.style.display = "none";
     // });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -65283,6 +65278,43 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     })
   })  
+
+  // firebase scores
+  const showScores = (highScores) => {
+    const leaderboard = document.getElementById('leaderboard');
+
+    if(leaderboard.childElementCount > 0) {
+      while(leaderboard.hasChildNodes()) { leaderboard.removeChild(leaderboard.lastChild); }
+    }
+
+    const scores = Object.keys(highScores)
+      .map(el => parseInt(el))
+      .sort((a,b) => a - b);
+    let row, usernameCell, scoreCell;
+
+    for (var i = 0; i < scores.length; i++) {
+      row = leaderboard.insertRow(i);
+      usernameCell = row.insertCell(0);
+      scoreCell = row.insertCell(1);
+
+      usernameCell.innerHTML = highScores[scores[i]];
+      scoreCell.innerHTML = scores[i];
+    }
+  }
+
+  const postScore = (name, score) => {
+    const scoreRef = firebaseDB.ref('highscores/' + `${score}`);
+    scoreRef.set(name);
+  };
+
+  const fetchScores = () => {
+    firebaseDB.ref('/highscores/').once('value').then( snap => {
+      let scores = snap.val();
+      showScores(scores);
+    });
+  };
+
+  fetchScores()
   
   // tone.js
   const tones = [ "eb4", "eb3", "eb2", "eb5", "f2", "f3", "f4", "f5", "ab2", "ab3", "ab4", "c2", "c3", "c4", "c5", "db2", "db3", "db4", "db5", "db6", "eb6","f6" , "ab6", "c6"]

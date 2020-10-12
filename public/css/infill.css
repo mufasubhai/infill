@@ -70,6 +70,14 @@
     cursor: pointer;
 }
 
+#leaderboard td {
+    color: white;
+    text-shadow: 3px 3px  #ac13d6;
+  font-family: "Lucida Console", Monaco, monospace;
+
+
+}
+
 
 .canvas-container {
  display:inline-block;
