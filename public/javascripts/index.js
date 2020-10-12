@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
      
 
         if(game.gameOver) {
-            gameView.pause = true;
+git s            gameView.pause = true;
               clearInterval(currentLevelLoop)
             // const winnerWinnerModal = document.getElementById('winner_winner')
           
@@ -162,14 +162,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        if ((game.levelTimer() <= 0) && (game.overallScore() < 50)) {
+        if ((game.levelTimer() <= 0.01) && (game.overallScore() < 50)) {
+          game.startTime = 0;
           game.gameOver = true;
+          
           // game.startTime = Date.now()
           // gameView.pause = true;
           // clearInterval(currentLevelLoop)
           
           
-        } else if ((game.levelTimer() <= 0) && (game.overallScore() > 50)) {
+        } else if ((game.levelTimer() <= 0.01) && (game.overallScore() > 50)) {
           game.startTime = 0;
           
           

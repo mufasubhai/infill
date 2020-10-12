@@ -28,7 +28,8 @@ class Game {
                     let circleY = 58 * j;
                     let growSpeed = .1 +(Math.floor(Math.random() * 5) *.03);
                     let maxRad = 1000;
-                    let rad = Math.floor(Math.random() * 5) + 10;
+                    // let rad = Math.floor(Math.random() * 5) + 10;
+                    let rad = 1;
                     let colors = [ '#c43e37', '#c45637', '#b37120', '#b32036', '#a68428']
                     let randomColor = colors[Math.floor(Math.random() * 4)]
                     const circle = new enemyCircle({
@@ -47,7 +48,8 @@ class Game {
                     let circleY = 56 * j;   
                     let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
                     let maxRad = 1000;
-                    let rad = Math.floor(Math.random() * 5) + 10;
+                    // let rad = Math.floor(Math.random() * 5) + 10;
+                    let rad = 1;
                     let colors = [ '#28a641', '#28a6a4', '#284aa6', '#41338f', '#1f6a87']
                     let randomColor = colors[Math.floor(Math.random() * 4)]
                     
