@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     game.finalScore = 0;
     finalScore = 0;
     game.startTime = Date.now();
+    gameLoop(1);
   }
 
   
@@ -142,25 +143,22 @@ document.addEventListener("DOMContentLoaded", () => {
     
     ctx.clearRect(0,0,1000,800)
     game.buildLevel(levels[level]);
-
+    gameView.pause = false;
+    gameView.start();
 
       let currentLevelLoop = window.setInterval(function() {
      
 
         if(game.gameOver) {
-git s            gameView.pause = true;
+              gameView.pause = true;
               clearInterval(currentLevelLoop)
             // const winnerWinnerModal = document.getElementById('winner_winner')
-          
         }
   
         if (currentLevel > Object.keys(levels).length - 1 ) {
           game.gameOver = true;
             gameView.pause = true;
-
-  
         }
-
 
         if ((game.levelTimer() <= 0.01) && (game.overallScore() < 50)) {
           game.startTime = 0;
@@ -173,14 +171,10 @@ git s            gameView.pause = true;
           
         } else if ((game.levelTimer() <= 0.01) && (game.overallScore() > 50)) {
           game.startTime = 0;
-          
-          
           game.finalScore += game.overallScore();
-          
-          
           clearInterval(currentLevelLoop)
-          // gameView.pause = true;
-          ctx.clearRect(0, 0, 1000, 800);
+          gameView.pause = true;
+          // ctx.clearRect(0, 0, 1000, 800);
           
           timed = 3;
           
@@ -203,6 +197,7 @@ git s            gameView.pause = true;
               game.gameOver = true;
               game.currentLevel -= 1;
             }
+            
             gameLoop(level+1)
             game.startTime = Date.now();
 
