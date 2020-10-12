@@ -46189,12 +46189,16 @@ const GameView = __webpack_require__(/*! ./components/game_view */ "./public/jav
 
 document.addEventListener("DOMContentLoaded", () => {
   
-  const tones = [ "eb4", "eb3", "eb2", "eb5", "f2", "f3", "f4", "f5", "ab2", "ab3", "ab4", "c1", "c2", "c3", "c4", "c5", "db2", "db3", "db4", "db5" ]
+  const tones = [ "eb4", "eb3", "eb2", "eb5", "f2", "f3", "f4", "f5", "ab2", "ab3", "ab4", "c2", "c3", "c4", "c5", "db2", "db3", "db4", "db5", "db6", "eb6","f6" , "ab6", "c6"]
   const notes = [ "1n", "2n", "3n", "4n", "8n", "16n" ] 
         
-  const pingPong = new tone__WEBPACK_IMPORTED_MODULE_6__["PingPongDelay"]("2n", .2).toDestination();
-
-  let synth1 = new tone__WEBPACK_IMPORTED_MODULE_6__["FMSynth"]().toDestination().connect(pingPong);
+  const pingPong = new tone__WEBPACK_IMPORTED_MODULE_6__["PingPongDelay"]("2n", .4).toDestination();
+const phaser = new tone__WEBPACK_IMPORTED_MODULE_6__["Phaser"]({
+	frequency: 15,
+	octaves: 5,
+	baseFrequency: 10000
+}).toDestination();
+  let synth1 = new tone__WEBPACK_IMPORTED_MODULE_6__["MonoSynth"]().toDestination().connect(pingPong, phaser);
   let synth2 = new tone__WEBPACK_IMPORTED_MODULE_6__["AMSynth"]().toDestination().connect(pingPong);
   console.log(synth1)
   
