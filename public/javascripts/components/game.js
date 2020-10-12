@@ -11,6 +11,9 @@ class Game {
         this.gameOver = false;
         this.levelStart = null;
         this.startTime = Date.now();
+        this.levelTime = "";
+        this.currentLevel = 1
+        this.finalScore = 0;
     }
 
     buildLevel(level) {
@@ -70,8 +73,13 @@ class Game {
     // }
 
     levelTimer() {
-         const levelTime =  (Date.now() - this.startTime) / 1000;
-        return levelTime
+        if (this.startTime === 0) {
+            return 0;
+        } else {
+            const levelTime =  (Date.now() - this.startTime) / 1000;
+           return  15 - levelTime
+
+        }
     }
 
     allCircles() {
@@ -80,9 +88,12 @@ class Game {
 
     draw(ctx) {
        ctx.clearRect(0, 0, 1200, 800);
+ 
         this.allCircles().forEach(circle => (circle.draw(ctx)));
         this.allCircles().forEach(circle => (circle.grow()))
         this.checkCollisions();
+        //   ctx.save();
+        //   ctx.clearRect(0,0, 1200, 800)
        
     }
 
