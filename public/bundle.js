@@ -45856,10 +45856,10 @@ class Game {
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
-                    let circleX = 65 * i;
-                    let circleY = 65 * j;
+                    let circleX = 55 * i;
+                    let circleY = 58 * j;
                     let growSpeed = .1 +(Math.floor(Math.random() * 5) *.03);
-                    let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
+                    let maxRad = 1000;
                     let rad = Math.floor(Math.random() * 5) + 10;
                     let colors = [ '#c43e37', '#c45637', '#b37120', '#b32036', '#a68428']
                     let randomColor = colors[Math.floor(Math.random() * 4)]
@@ -45875,10 +45875,10 @@ class Game {
                     levelEnemyCircles.push(circle)
 
                 } else if (level[i][j] === 2) {
-                    let circleX = 65 * i;
-                    let circleY = 65 * j;   
+                    let circleX = 55 * i;
+                    let circleY = 56 * j;   
                     let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
-                    let maxRad = Math.floor(Math.random() * 5) * 100 + 100;
+                    let maxRad = 1000;
                     let rad = Math.floor(Math.random() * 5) + 10;
                     let colors = [ '#28a641', '#28a6a4', '#284aa6', '#41338f', '#1f6a87']
                     let randomColor = colors[Math.floor(Math.random() * 4)]
@@ -45994,26 +45994,41 @@ class GameView {
         if (!this.pause) {
 
             this.game.draw(this.ctx);
-            this.ctx.font = "20px Arial";
-            this.ctx.fillStyle = 'Black';
-               this.ctx.shadowColor = 'white';
-            this.ctx.shadowOffsetX = 2;
-            this.ctx.shadowOffsetY = 2;
-            this.ctx.shadowBlur = 1;
-            this.ctx.fillText(this.game.levelTimer().toFixed(1), 20  ,40)
-
-            this.ctx.font = "20px Arial";
-            this.ctx.fillStyle = "black";
-            this.ctx.shadowColor = 'white';
-            this.ctx.shadowOffsetX = 2;
-            this.ctx.shadowOffsetY = 2;
-            this.ctx.shadowBlur = 1;
-            this.ctx.fillText(`Current Level: ${this.game.overallScore().toFixed()}% Full`, 200, 40);
-
-
-            this.ctx.font = "50px Arial";
+            this.ctx.font = "20px Monaco";
             this.ctx.fillStyle = "white";
-            this.ctx.fillText(this.game.levelTime, 600, 400)
+               this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`Time: ${this.game.levelTimer().toFixed(1)}`, 40  ,40)
+
+            this.ctx.font = "20px Monaco";
+            this.ctx.fillStyle = "white";
+            this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`${this.game.overallScore().toFixed()}% Full`, 235, 40);
+
+
+            this.ctx.font = "20px Monaco";
+            this.ctx.fillStyle = "white";
+            this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`Current Phase: ${this.game.currentLevel}/9 `, 400, 40);
+      
+      
+            this.ctx.font = "20px Monaco";
+            this.ctx.fillStyle = "white";
+            this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`Total Score: ${this.game.finalScore.toFixed(1)}`, 700, 40);
+
+
            requestAnimationFrame(this.animate.bind(this))
         }
     }
@@ -46184,8 +46199,8 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(synth1)
   
   const canvas = document.getElementById("game-canvas");
-  canvas.width = "1100";
-  canvas.height = "715";
+  canvas.width = "932";
+  canvas.height = "632";
   canvas.style =  _components_elements__WEBPACK_IMPORTED_MODULE_2__["Gradients"][Math.floor(Math.random() * 12)];  
   
   const ctx = canvas.getContext("2d");
@@ -46275,7 +46290,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.fillstyle = '#FFFFFF';
   // ctx.fillText(`poop`, 100  ,100)
   // ctx.fillText(`${game.overallScore()}`, 60, 90);
-  
+
   const gameLoop = (level) => {
     
 
@@ -46283,7 +46298,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    ctx.clearRect(0,0,1200,800)
+    ctx.clearRect(0,0,1000,800)
     game.buildLevel(levels[level]);
 
 
@@ -46318,25 +46333,24 @@ document.addEventListener("DOMContentLoaded", () => {
           game.startTime = Date.now()
           gameView.pause = true;
 
-          // ctx.clearRect(0, 0, 1200, 800);
+          // ctx.clearRect(0, 0, 1000, 800);
           clearInterval(currentLevelLoop)
           
           
           
         } else if ((game.levelTimer() <= 0) && (game.overallScore() > 50)) {
           game.startTime = 0;
-          game.currentLevel += 1
+          
           
           game.finalScore += game.overallScore();
           
           
           clearInterval(currentLevelLoop)
           // gameView.pause = true;
-          ctx.clearRect(0, 0, 1200, 800);
-          canvas.style =  _components_elements__WEBPACK_IMPORTED_MODULE_2__["Gradients"][Math.floor(Math.random() * 12)];  
-
+          ctx.clearRect(0, 0, 1000, 800);
+          
           timed = 5;
-         
+          
           let restartTimer = setInterval(function(){
             if (timed >= 0) {
               console.log(timed)
@@ -46346,11 +46360,12 @@ document.addEventListener("DOMContentLoaded", () => {
               game.levelTime = ""
             }
           }, 1000)
-
+          
           setTimeout(function() {
             // gameView.pause = false;
-            gameView.start();
-            
+            // gameView.start();
+            canvas.style =  _components_elements__WEBPACK_IMPORTED_MODULE_2__["Gradients"][Math.floor(Math.random() * 12)];  
+            game.currentLevel += 1
             gameLoop(level+1)
             game.startTime = Date.now();
 

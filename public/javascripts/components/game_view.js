@@ -16,26 +16,41 @@ class GameView {
         if (!this.pause) {
 
             this.game.draw(this.ctx);
-            this.ctx.font = "20px Arial";
-            this.ctx.fillStyle = 'Black';
-               this.ctx.shadowColor = 'white';
-            this.ctx.shadowOffsetX = 2;
-            this.ctx.shadowOffsetY = 2;
-            this.ctx.shadowBlur = 1;
-            this.ctx.fillText(this.game.levelTimer().toFixed(1), 20  ,40)
-
-            this.ctx.font = "20px Arial";
-            this.ctx.fillStyle = "black";
-            this.ctx.shadowColor = 'white';
-            this.ctx.shadowOffsetX = 2;
-            this.ctx.shadowOffsetY = 2;
-            this.ctx.shadowBlur = 1;
-            this.ctx.fillText(`Current Level: ${this.game.overallScore().toFixed()}% Full`, 200, 40);
-
-
-            this.ctx.font = "50px Arial";
+            this.ctx.font = "20px Monaco";
             this.ctx.fillStyle = "white";
-            this.ctx.fillText(this.game.levelTime, 600, 400)
+               this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`Time: ${this.game.levelTimer().toFixed(1)}`, 40  ,40)
+
+            this.ctx.font = "20px Monaco";
+            this.ctx.fillStyle = "white";
+            this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`${this.game.overallScore().toFixed()}% Full`, 235, 40);
+
+
+            this.ctx.font = "20px Monaco";
+            this.ctx.fillStyle = "white";
+            this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`Current Phase: ${this.game.currentLevel}/9 `, 400, 40);
+      
+      
+            this.ctx.font = "20px Monaco";
+            this.ctx.fillStyle = "white";
+            this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowOffsetX = 2;
+            this.ctx.shadowOffsetY = 2;
+            this.ctx.shadowBlur = 1;
+            this.ctx.fillText(`Total Score: ${this.game.finalScore.toFixed(1)}`, 700, 40);
+
+
            requestAnimationFrame(this.animate.bind(this))
         }
     }

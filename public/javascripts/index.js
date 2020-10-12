@@ -109,8 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log(synth1)
   
   const canvas = document.getElementById("game-canvas");
-  canvas.width = "1100";
-  canvas.height = "715";
+  canvas.width = "932";
+  canvas.height = "632";
   canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
   
   const ctx = canvas.getContext("2d");
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ctx.fillstyle = '#FFFFFF';
   // ctx.fillText(`poop`, 100  ,100)
   // ctx.fillText(`${game.overallScore()}`, 60, 90);
-  
+
   const gameLoop = (level) => {
     
 
@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    ctx.clearRect(0,0,1200,800)
+    ctx.clearRect(0,0,1000,800)
     game.buildLevel(levels[level]);
 
 
@@ -243,25 +243,24 @@ document.addEventListener("DOMContentLoaded", () => {
           game.startTime = Date.now()
           gameView.pause = true;
 
-          // ctx.clearRect(0, 0, 1200, 800);
+          // ctx.clearRect(0, 0, 1000, 800);
           clearInterval(currentLevelLoop)
           
           
           
         } else if ((game.levelTimer() <= 0) && (game.overallScore() > 50)) {
           game.startTime = 0;
-          game.currentLevel += 1
+          
           
           game.finalScore += game.overallScore();
           
           
           clearInterval(currentLevelLoop)
           // gameView.pause = true;
-          ctx.clearRect(0, 0, 1200, 800);
-          canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
-
+          ctx.clearRect(0, 0, 1000, 800);
+          
           timed = 5;
-         
+          
           let restartTimer = setInterval(function(){
             if (timed >= 0) {
               console.log(timed)
@@ -271,11 +270,12 @@ document.addEventListener("DOMContentLoaded", () => {
               game.levelTime = ""
             }
           }, 1000)
-
+          
           setTimeout(function() {
             // gameView.pause = false;
-            gameView.start();
-            
+            // gameView.start();
+            canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
+            game.currentLevel += 1
             gameLoop(level+1)
             game.startTime = Date.now();
 
