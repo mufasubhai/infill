@@ -18,7 +18,7 @@ class GameView {
             this.game.draw(this.ctx);
             this.ctx.font = "20px Monaco";
             this.ctx.fillStyle = "white";
-               this.ctx.shadowColor = '#ac13d6';
+            this.ctx.shadowColor = '#ac13d6';
             this.ctx.shadowOffsetX = 2;
             this.ctx.shadowOffsetY = 2;
             this.ctx.shadowBlur = 1;
