@@ -64925,12 +64925,13 @@ class Game {
         let levelFriendlyCircles = [];
         // console.log('build-level-game')
         let speeds = [.06, .07, .08, .09, .1 , .11, .12, .13, .14, .15]
+        let speeds2 = [.08, .09, .1 , .11, .12, .13, .14, .15, .16, .17,]
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
                     let circleX = 55 * i;
                     let circleY = 58 * j;
-                    let growSpeed = speeds[Math.floor(Math.random() * 9)]
+                    let growSpeed = speeds2[Math.floor(Math.random() * 9)]
                     let maxRad = 1000;
                     // let rad = Math.floor(Math.random() * 5) + 10;
                     let rad = 1;
@@ -65262,7 +65263,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const levels = _components_elements__WEBPACK_IMPORTED_MODULE_2__["Levels"];
   const game = new _components_game__WEBPACK_IMPORTED_MODULE_1__["default"]();
   const gameView = new GameView(ctx, game)
-  let currentLevel = 1;
+  
   let finalScore = game.finalScore;
   let timed = game.levelTime
   gameView.start();
@@ -65356,14 +65357,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const restartGame = () => {
     gameLoop(1);
+    // game.pause = false;
+    // game.start();
     game.startTime = Date.now();
     game.currentLevel = 1;
+    game.finalScore = 0;
   }
 
   
 
   const gameLoop = (level) => {
-    
+    game.currentLevel = level;
     ctx.clearRect(0,0,1000,800)
     game.buildLevel(levels[level]);
     gameView.pause = false;
@@ -65377,8 +65381,12 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(currentLevelLoop)
             // const winnerWinnerModal = document.getElementById('winner_winner')
         }
-  
-        if (currentLevel > Object.keys(levels).length - 1 ) {
+        
+        if (game.currentLevel === 10) {
+              game.gameOver = true;
+              game.currentLevel -= 1;
+            }
+        if (game.currentLevel > Object.keys(levels).length - 1 ) {
           game.gameOver = true;
             gameView.pause = true;
         }
@@ -65415,13 +65423,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // gameView.pause = false;
             // gameView.start();
             canvas.style =  _components_elements__WEBPACK_IMPORTED_MODULE_2__["Gradients"][Math.floor(Math.random() * 12)];  
-            game.currentLevel += 1
-            if (game.currentLevel === 10) {
-              game.gameOver = true;
-              game.currentLevel -= 1;
-            }
             
-            gameLoop(game.currentLevel)
+            
+            gameLoop(level + 1)
             game.startTime = Date.now();
 
           }, 4000)

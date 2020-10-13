@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const levels = Levels;
   const game = new Game();
   const gameView = new GameView(ctx, game)
-  let currentLevel = 1;
+  
   let finalScore = game.finalScore;
   let timed = game.levelTime
   gameView.start();
@@ -187,14 +187,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const restartGame = () => {
     gameLoop(1);
+    // game.pause = false;
+    // game.start();
     game.startTime = Date.now();
     game.currentLevel = 1;
+    game.finalScore = 0;
   }
 
   
 
   const gameLoop = (level) => {
-    
+    game.currentLevel = level;
     ctx.clearRect(0,0,1000,800)
     game.buildLevel(levels[level]);
     gameView.pause = false;
@@ -208,8 +211,12 @@ document.addEventListener("DOMContentLoaded", () => {
               clearInterval(currentLevelLoop)
             // const winnerWinnerModal = document.getElementById('winner_winner')
         }
-  
-        if (currentLevel > Object.keys(levels).length - 1 ) {
+        
+        if (game.currentLevel === 10) {
+              game.gameOver = true;
+              game.currentLevel -= 1;
+            }
+        if (game.currentLevel > Object.keys(levels).length - 1 ) {
           game.gameOver = true;
             gameView.pause = true;
         }
@@ -246,13 +253,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // gameView.pause = false;
             // gameView.start();
             canvas.style =  Gradients[Math.floor(Math.random() * 12)];  
-            game.currentLevel += 1
-            if (game.currentLevel === 10) {
-              game.gameOver = true;
-              game.currentLevel -= 1;
-            }
             
-            gameLoop(game.currentLevel)
+            
+            gameLoop(level + 1)
             game.startTime = Date.now();
 
           }, 4000)

@@ -22,12 +22,13 @@ class Game {
         let levelFriendlyCircles = [];
         // console.log('build-level-game')
         let speeds = [.06, .07, .08, .09, .1 , .11, .12, .13, .14, .15]
+        let speeds2 = [.08, .09, .1 , .11, .12, .13, .14, .15, .16, .17,]
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
                     let circleX = 55 * i;
                     let circleY = 58 * j;
-                    let growSpeed = speeds[Math.floor(Math.random() * 9)]
+                    let growSpeed = speeds2[Math.floor(Math.random() * 9)]
                     let maxRad = 1000;
                     // let rad = Math.floor(Math.random() * 5) + 10;
                     let rad = 1;
