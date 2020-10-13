@@ -65247,6 +65247,11 @@ document.addEventListener("DOMContentLoaded", () => {
     restartGame();
   })
   
+  document.getElementById('restart1').addEventListener("click", (e) => {
+    let restart = document.getElementById('restart1');
+    restartGame();
+  })
+  
   const canvas = document.getElementById("game-canvas");
   canvas.width = "932";
   canvas.height = "632";
@@ -65295,7 +65300,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(leaderboard.childElementCount > 0) {
       while(leaderboard.hasChildNodes()) { leaderboard.removeChild(leaderboard.lastChild); }
-    }
+    }res
 
     const scores = Object.keys(highScores)
       .map(score => score)
@@ -65352,6 +65357,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const restartGame = () => {
     gameLoop(1);
     game.startTime = Date.now();
+    game.currentLevel = 1;
   }
 
   
@@ -65415,7 +65421,7 @@ document.addEventListener("DOMContentLoaded", () => {
               game.currentLevel -= 1;
             }
             
-            gameLoop(level+1)
+            gameLoop(game.currentLevel)
             game.startTime = Date.now();
 
           }, 4000)
