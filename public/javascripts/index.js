@@ -41,18 +41,17 @@ import 'firebase/database';
 
 
 document.addEventListener("DOMContentLoaded", () => {
-Tone.start();
   // initialization
   document.getElementById('music').addEventListener("click", (e) => {
     let music = document.getElementById('music');
     if (Tone.Master.mute === true) {
       Tone.Master.mute = false;
       music.innerHTML = "Mute Sound"
-    
+      
     } else {
       Tone.Master.mute = true;
       music.innerHTML = "Unmute Sound"
-    
+      
     }
   })
   
@@ -146,21 +145,37 @@ Tone.start();
   };
 
    const removeLowestScore = () => {
-    firebaseDB.ref(`highscores`).once(`value`).then( snap => {
+    firebaseDB.ref(`/highscores/`).once(`value`).then( snap => {
       const highScores = snap.val();
+      console.log(highScores)
       const scores = Object.keys(highScores)
         .map( score => score)
         .sort((a,b) => b - a);
-      const lowestScore = scores[scores.length - 1].toString();
-      const scoreRefs = firebaseDB.ref(`highscores` + lowestScore);
-      console.log(lowestScore)
-      scoreRefs.remove().then(fetchScores() );
+        console.log(scores)
+      const lowestScore = scores[scores.length - 1];
+      const scoreRefs = firebaseDB.ref(`/highscores/${lowestScore}`);
+  
+      scoreRefs.remove().then(fetchScores());
     });
   };
 
+   // const removeLowestScore = () => {
+  //   firebaseDB.ref('/scores/').once('value').then( snap => {
+  //     highScores = snap.val();
+  //     const scores = Object.keys(highScores)
+  //       .map(el => parseInt(el))
+  //       .sort((a,b) => a - b);
+  //     const lowestScore = scores[scores.length - 1].toString();
+  //     const scoreRefs = firebaseDB.ref('scores/' + lowestScore);
+
+  //     scoreRefs.remove().then( retrieveHighScores() );
+  //   });
+  // };
   fetchScores()
   
   // tone.js
+  Tone.start();
+
   const tones = [ "eb4", "eb3", "eb2", "eb5", "f2", "f3", "f4", "f5", "ab2", "ab3", "ab4", "c2", "c3", "c4", "c5", "db2", "db3", "db4", "db5", "db6", "eb6","f6" , "ab6", "c6"]
   const notes = [ "1n", "2n", "3n", "4n", "8n", "16n" ]       
   const pingPong = new Tone.PingPongDelay("2n", .4).toDestination();
