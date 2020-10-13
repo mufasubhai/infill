@@ -74,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // restart game
   document.getElementById('restart').addEventListener("click", (e) => {
-    let restart = document.getElementById('restart');
+    const gameOver = document.getElementById('game-over');
+              gameOver.style.display = 'none'
     restartGame();
   })
   
@@ -210,7 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if(game.gameOver) {
               gameView.pause = true;
               clearInterval(currentLevelLoop)
-            // const winnerWinnerModal = document.getElementById('winner_winner')
+              const gameOver = document.getElementById('game-over');
+              gameOver.style.display = 'block'
         }
         
         if (game.currentLevel === 10) {

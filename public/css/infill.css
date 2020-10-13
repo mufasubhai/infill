@@ -141,9 +141,9 @@ background: white;
      border: 3px solid white;
      box-shadow: 4px 3px #ac13d6;
     border-radius: 4px;
-
+    display: none;
     
-}
+} 
 
 #game-over-contents {
       color: white;
