@@ -65210,21 +65210,6 @@ const GameView = __webpack_require__(/*! ./components/game_view */ "./public/jav
 // </script>
 
 
-
-    // document.getElementById("game-over-yes").addEventListener("click", (e) => {
-    //   const modal = document.getElementById("game-over-modal");
-    //   modal.style.display = "none";
-    //   restartLevel();
-    //   requestAnimationFrame(update);
-    // });
-
-    // document.getElementById("game-over-no").addEventListener("click", (e) => {
-    //   const modal = document.getElementById("game-over-modal");
-    //   modal.style.display = "none";
-    // });
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
   // initialization
@@ -65241,7 +65226,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
   
-  
+
   // restart game
   document.getElementById('restart').addEventListener("click", (e) => {
     const gameOver = document.getElementById('game-over');
@@ -65320,25 +65305,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const postScore = (name, score) => {
-    const scoreRef = firebaseDB.ref('highscores/' + `${score}`);
-    scoreRef.set(name);
+    const scoreRef = firebaseDB.ref(`highscores/${name}`);
+    scoreRef.set(score);
   };
 
   const fetchScores = () => {
-    firebaseDB.ref('/highscores/').once('value').then( snap => {
+    firebaseDB.ref(`highscores`).once(`value`).then( snap => {
       let scores = snap.val();
       showScores(scores);
     });
   };
 
    const removeLowestScore = () => {
-    firebaseDB.ref('/highscores/').once('value').then( snap => {
+    firebaseDB.ref(`highscores`).once(`value`).then( snap => {
       highScores = snap.val();
       const scores = Object.keys(highScores)
         .map( score => score)
         .sort((a,b) => b - a);
       const lowestScore = scores[scores.length - 1].toString();
-      const scoreRefs = firebaseDB.ref('highscores/' + lowestScore);
+      const scoreRefs = firebaseDB.ref(`highscores` + lowestScore);
 
       scoreRefs.remove().then( retrieveHighScores() );
     });
@@ -65381,8 +65366,37 @@ document.addEventListener("DOMContentLoaded", () => {
         if(game.gameOver) {
               gameView.pause = true;
               clearInterval(currentLevelLoop)
-              const gameOver = document.getElementById('game-over');
+              const leaderboardCells = document.getElementsByTagName('td');
+              const lowestScore = Number(leaderboardCells[leaderboardCells.length - 1].innerHTML);
+              const numScores = document.getElementById('leaderboard').lastChild.childElementCount;
+              const nameInput = document.createElement('input');
+              const scoreSubmit = document.createElement('button');
+
+              
+              let gameOver = document.getElementById('game-over');
+              
               gameOver.style.display = 'block'
+
+              if((game.finalScore > lowestScore) || (numScores < 20))  {
+                let name = '';
+                nameInput.setAttribute('id', 'nameinput')
+                scoreSubmit.setAttribute('id', 'scoresubmit')
+                nameInput.setAttribute('type', 'text');
+                nameInput.setAttribute('maxlength', '10')
+                nameInput.setAttribute('minlength', '2')
+
+                nameInput.addEventListener('change', (e) => {
+                  name = e.currentTarget.value;
+                })
+
+                scoreSubmit.innerHTML = "Post High Score"
+                scoreSubmit.addEventListener('click', (e) => {
+                  postScore(name, game.finalScore);
+                  
+                })
+              }
+              gameOver.appendChild(nameInput);
+              gameOver.appendChild(scoreSubmit)
         }
         
         if (game.currentLevel === 10) {
@@ -65408,7 +65422,7 @@ document.addEventListener("DOMContentLoaded", () => {
           game.finalScore += game.overallScore();
           clearInterval(currentLevelLoop)
           gameView.pause = true;
-          // ctx.clearRect(0, 0, 1000, 800);
+  
           
           timed = 3;
           

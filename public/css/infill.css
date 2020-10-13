@@ -129,11 +129,9 @@ background: white;
 
 #game-over {
     position: absolute;
-    display: block;
     width: 400px;
     padding: 30px;
     font-size: 20px;
-
     height: 200px;
     top: 450px;
     /* background: grey;
@@ -149,6 +147,5 @@ background: white;
       color: white;
     text-shadow: 3px 3px  #ac13d6;
   font-family: "Lucida Console", Monaco, monospace;
-  
   text-align: center;
 }
