@@ -194,6 +194,8 @@ document.addEventListener("DOMContentLoaded", () => {
      
 
         if(game.gameOver) {
+            // remove extra inputs
+
               gameView.pause = true;
               clearInterval(currentLevelLoop)
               const leaderboardCells = document.getElementsByTagName('td');
@@ -212,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 nameInput.setAttribute('id', 'nameinput')
                 scoreSubmit.setAttribute('id', 'scoresubmit')
                 nameInput.setAttribute('type', 'text');
-                nameInput.setAttribute('maxlength', '10')
+                nameInput.setAttribute('maxlength', '8')
                 nameInput.setAttribute('minlength', '2')
 
                 nameInput.addEventListener('change', (e) => {
@@ -221,8 +223,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 scoreSubmit.innerHTML = "Post High Score"
                 scoreSubmit.addEventListener('click', (e) => {
-                  postScore(name, game.finalScore);
-                  
+                  postScore(name, game.finalScore.toFixed(3));
+                  location.reload();
                 })
               }
               gameOver.appendChild(nameInput);
