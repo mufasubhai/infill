@@ -20,7 +20,6 @@ class Game {
     buildLevel(level) {
         let levelEnemyCircles = [];
         let levelFriendlyCircles = [];
-        // console.log('build-level-game')
         let speeds = [.03 , .04 , .05, .06, .07, .08, .09, .1]
         let speeds2 = [.08,.09, .1,.11,.12, .13, .14, .15, .16, .17]
         for (let i = 0; i < level.length; i++) {
@@ -71,7 +70,6 @@ class Game {
         }
         this.enemyCircles = levelEnemyCircles;
         this.friendlyCircles = levelFriendlyCircles;
-        console.log(this.friendlyCircles)
     }
 
     // playLevel(level) {

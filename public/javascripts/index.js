@@ -41,18 +41,18 @@ import 'firebase/database';
 
 
 document.addEventListener("DOMContentLoaded", () => {
-
+Tone.start();
   // initialization
   document.getElementById('music').addEventListener("click", (e) => {
     let music = document.getElementById('music');
     if (Tone.Master.mute === true) {
       Tone.Master.mute = false;
       music.innerHTML = "Mute Sound"
-      console.log(Tone.Master.mute)
+    
     } else {
       Tone.Master.mute = true;
       music.innerHTML = "Unmute Sound"
-      console.log(Tone.Master.mute)
+    
     }
   })
   
@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   
   document.getElementById('restart1').addEventListener("click", (e) => {
-    let restart = document.getElementById('restart1');
     restartGame();
   })
   
@@ -130,13 +129,13 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreCell = row.insertCell(1);
 
       usernameCell.innerHTML = highScores[scores[i]];
-      scoreCell.innerHTML = scores[i];
+      scoreCell.innerHTML = scores[i] / 1000;
     }
   }
 
   const postScore = (name, score) => {
-    const scoreRef = firebaseDB.ref(`highscores/${name}`);
-    scoreRef.set(score);
+    const scoreRef = firebaseDB.ref(`highscores/${score * 1000}`);
+    scoreRef.set(name);
   };
 
   const fetchScores = () => {
@@ -148,14 +147,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
    const removeLowestScore = () => {
     firebaseDB.ref(`highscores`).once(`value`).then( snap => {
-      highScores = snap.val();
+      const highScores = snap.val();
       const scores = Object.keys(highScores)
         .map( score => score)
         .sort((a,b) => b - a);
       const lowestScore = scores[scores.length - 1].toString();
       const scoreRefs = firebaseDB.ref(`highscores` + lowestScore);
-
-      scoreRefs.remove().then( retrieveHighScores() );
+      console.log(lowestScore)
+      scoreRefs.remove().then(fetchScores() );
     });
   };
 
@@ -209,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
               
               gameOver.style.display = 'block'
 
-              if((game.finalScore > lowestScore) || (numScores < 20))  {
+              if(game.finalScore > lowestScore) {
                 let name = '';
                 nameInput.setAttribute('id', 'nameinput')
                 scoreSubmit.setAttribute('id', 'scoresubmit')
@@ -224,11 +223,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 scoreSubmit.innerHTML = "Post High Score"
                 scoreSubmit.addEventListener('click', (e) => {
                   postScore(name, game.finalScore.toFixed(3));
-                  location.reload();
+                  removeLowestScore();
+                  // location.reload();
                 })
+                gameOver.appendChild(nameInput);
+                gameOver.appendChild(scoreSubmit)
               }
-              gameOver.appendChild(nameInput);
-              gameOver.appendChild(scoreSubmit)
         }
         
         if (game.currentLevel === 10) {
@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
           
           let restartTimer = setInterval(function(){
             if (timed >= 0) {
-              console.log(timed)
+              
               timed -= 1
             } else {
               clearInterval(restartTimer)
