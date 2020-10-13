@@ -131,8 +131,17 @@ background: white;
     position: absolute;
     display: block;
     width: 400px;
-    height: 400px;
-    top: 600px;
+    padding: 30px;
+    font-size: 20px;
+
+    height: 200px;
+    top: 450px;
+    /* background: grey;
+     */
+     border: 3px solid white;
+     box-shadow: 4px 3px #ac13d6;
+    border-radius: 4px;
+
     
 }
 
@@ -140,5 +149,6 @@ background: white;
       color: white;
     text-shadow: 3px 3px  #ac13d6;
   font-family: "Lucida Console", Monaco, monospace;
+  
   text-align: center;
 }

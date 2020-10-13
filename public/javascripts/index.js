@@ -187,8 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const restartGame = () => {
     gameLoop(1);
-    // game.pause = false;
+    gameView.pause = false;
     // game.start();
+    game.gameOver = false;
     game.startTime = Date.now();
     game.currentLevel = 1;
     game.finalScore = 0;
