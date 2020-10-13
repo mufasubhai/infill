@@ -154,23 +154,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(scores)
       const lowestScore = scores[scores.length - 1];
       const scoreRefs = firebaseDB.ref(`/highscores/${lowestScore}`);
-  
+      console.log(scoreRefs)
       scoreRefs.remove().then(fetchScores());
     });
   };
 
-   // const removeLowestScore = () => {
-  //   firebaseDB.ref('/scores/').once('value').then( snap => {
-  //     highScores = snap.val();
-  //     const scores = Object.keys(highScores)
-  //       .map(el => parseInt(el))
-  //       .sort((a,b) => a - b);
-  //     const lowestScore = scores[scores.length - 1].toString();
-  //     const scoreRefs = firebaseDB.ref('scores/' + lowestScore);
 
-  //     scoreRefs.remove().then( retrieveHighScores() );
-  //   });
-  // };
   fetchScores()
   
   // tone.js
@@ -188,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const restartGame = () => {
     gameLoop(1);
     gameView.pause = false;
-    // game.start();
+    location.reload();
     game.gameOver = false;
     game.startTime = Date.now();
     game.currentLevel = 1;
@@ -239,7 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 scoreSubmit.addEventListener('click', (e) => {
                   postScore(name, game.finalScore.toFixed(3));
                   removeLowestScore();
-                  // location.reload();
+                  setTimeout(function() {
+                    location.reload()
+                  }, 1500)
+                 
                 })
                 gameOver.appendChild(nameInput);
                 gameOver.appendChild(scoreSubmit)
