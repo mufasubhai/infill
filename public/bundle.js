@@ -65300,7 +65300,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(leaderboard.childElementCount > 0) {
       while(leaderboard.hasChildNodes()) { leaderboard.removeChild(leaderboard.lastChild); }
-    }res
+    }
 
     const scores = Object.keys(highScores)
       .map(score => score)
