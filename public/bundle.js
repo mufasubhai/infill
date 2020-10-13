@@ -64918,18 +64918,19 @@ class Game {
         this.currentLevel = 1
         this.finalScore = 0;
     }
-
+    
+    
     buildLevel(level) {
         let levelEnemyCircles = [];
         let levelFriendlyCircles = [];
         // console.log('build-level-game')
-
+        let speeds = [.06, .07, .08, .09, .1 , .11, .12, .13, .14, .15]
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
                     let circleX = 55 * i;
                     let circleY = 58 * j;
-                    let growSpeed = .1 +(Math.floor(Math.random() * 5) *.03);
+                    let growSpeed = speeds[Math.floor(Math.random() * 9)]
                     let maxRad = 1000;
                     // let rad = Math.floor(Math.random() * 5) + 10;
                     let rad = 1;
@@ -64949,7 +64950,8 @@ class Game {
                 } else if (level[i][j] === 2) {
                     let circleX = 55 * i;
                     let circleY = 56 * j;   
-                    let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
+                    let growSpeed = speeds[Math.floor(Math.random() * 9)]
+                    // let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
                     let maxRad = 1000;
                     // let rad = Math.floor(Math.random() * 5) + 10;
                     let rad = 1;
@@ -64971,6 +64973,7 @@ class Game {
         }
         this.enemyCircles = levelEnemyCircles;
         this.friendlyCircles = levelFriendlyCircles;
+        console.log(this.friendlyCircles)
     }
 
     // playLevel(level) {
@@ -65237,6 +65240,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
   
+  
+  // restart game
+  document.getElementById('restart').addEventListener("click", (e) => {
+    let restart = document.getElementById('restart');
+    restartGame();
+  })
+  
   const canvas = document.getElementById("game-canvas");
   canvas.width = "932";
   canvas.height = "632";
@@ -65246,9 +65256,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const levels = _components_elements__WEBPACK_IMPORTED_MODULE_2__["Levels"];
   const game = new _components_game__WEBPACK_IMPORTED_MODULE_1__["default"]();
+  const gameView = new GameView(ctx, game)
   let currentLevel = 1;
   let finalScore = game.finalScore;
-  let gameView = new GameView(ctx, game)
   let timed = game.levelTime
   gameView.start();
 
@@ -65288,8 +65298,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const scores = Object.keys(highScores)
-      .map(el => parseInt(el))
-      .sort((a,b) => a - b);
+      .map(score => score)
+      .sort((a,b) => b - a);
     let row, usernameCell, scoreCell;
 
     for (var i = 0; i < scores.length; i++) {
@@ -65314,6 +65324,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+   const removeLowestScore = () => {
+    firebaseDB.ref('/highscores/').once('value').then( snap => {
+      highScores = snap.val();
+      const scores = Object.keys(highScores)
+        .map( score => score)
+        .sort((a,b) => b - a);
+      const lowestScore = scores[scores.length - 1].toString();
+      const scoreRefs = firebaseDB.ref('highscores/' + lowestScore);
+
+      scoreRefs.remove().then( retrieveHighScores() );
+    });
+  };
+
   fetchScores()
   
   // tone.js
@@ -65327,12 +65350,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
   const restartGame = () => {
-  game.gameOver = false;
-    currentLevel = 1;
-    game.finalScore = 0;
-    finalScore = 0;
-    game.startTime = Date.now();
     gameLoop(1);
+    game.startTime = Date.now();
   }
 
   

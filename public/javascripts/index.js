@@ -71,6 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })
   
+  
+  // restart game
+  document.getElementById('restart').addEventListener("click", (e) => {
+    let restart = document.getElementById('restart');
+    restartGame();
+  })
+  
   const canvas = document.getElementById("game-canvas");
   canvas.width = "932";
   canvas.height = "632";
@@ -80,9 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const levels = Levels;
   const game = new Game();
+  const gameView = new GameView(ctx, game)
   let currentLevel = 1;
   let finalScore = game.finalScore;
-  let gameView = new GameView(ctx, game)
   let timed = game.levelTime
   gameView.start();
 
@@ -122,8 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const scores = Object.keys(highScores)
-      .map(el => parseInt(el))
-      .sort((a,b) => a - b);
+      .map(score => score)
+      .sort((a,b) => b - a);
     let row, usernameCell, scoreCell;
 
     for (var i = 0; i < scores.length; i++) {
@@ -148,6 +155,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+   const removeLowestScore = () => {
+    firebaseDB.ref('/highscores/').once('value').then( snap => {
+      highScores = snap.val();
+      const scores = Object.keys(highScores)
+        .map( score => score)
+        .sort((a,b) => b - a);
+      const lowestScore = scores[scores.length - 1].toString();
+      const scoreRefs = firebaseDB.ref('highscores/' + lowestScore);
+
+      scoreRefs.remove().then( retrieveHighScores() );
+    });
+  };
+
   fetchScores()
   
   // tone.js
@@ -161,12 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
   const restartGame = () => {
-  game.gameOver = false;
-    currentLevel = 1;
-    game.finalScore = 0;
-    finalScore = 0;
-    game.startTime = Date.now();
     gameLoop(1);
+    game.startTime = Date.now();
   }
 
   

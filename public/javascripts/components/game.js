@@ -15,18 +15,19 @@ class Game {
         this.currentLevel = 1
         this.finalScore = 0;
     }
-
+    
+    
     buildLevel(level) {
         let levelEnemyCircles = [];
         let levelFriendlyCircles = [];
         // console.log('build-level-game')
-
+        let speeds = [.06, .07, .08, .09, .1 , .11, .12, .13, .14, .15]
         for (let i = 0; i < level.length; i++) {
             for (let j = 0; j< level[0].length; j++) {
                 if (level[i][j] === 1) {
                     let circleX = 55 * i;
                     let circleY = 58 * j;
-                    let growSpeed = .1 +(Math.floor(Math.random() * 5) *.03);
+                    let growSpeed = speeds[Math.floor(Math.random() * 9)]
                     let maxRad = 1000;
                     // let rad = Math.floor(Math.random() * 5) + 10;
                     let rad = 1;
@@ -46,7 +47,8 @@ class Game {
                 } else if (level[i][j] === 2) {
                     let circleX = 55 * i;
                     let circleY = 56 * j;   
-                    let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
+                    let growSpeed = speeds[Math.floor(Math.random() * 9)]
+                    // let growSpeed = .1+ (Math.floor(Math.random() * 5) * .03);
                     let maxRad = 1000;
                     // let rad = Math.floor(Math.random() * 5) + 10;
                     let rad = 1;
@@ -68,6 +70,7 @@ class Game {
         }
         this.enemyCircles = levelEnemyCircles;
         this.friendlyCircles = levelFriendlyCircles;
+        console.log(this.friendlyCircles)
     }
 
     // playLevel(level) {
